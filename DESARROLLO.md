@@ -48,11 +48,15 @@ No se necesita ninguna variable secreta para ejecutar la versión actual. `.env.
 
 ## Publicación y colaboración
 
-Trabaja preferentemente en una rama y abre un pull request para revisar cambios antes de integrarlos en `main`. La conexión Git de Vercel debe apuntar a este repositorio y a `main` como rama de producción. Conserva el proyecto y el dominio existentes.
+La conexión Git de Vercel apunta a este repositorio y a `main` como rama de producción. Conserva el proyecto y el dominio existentes. Trabaja en una rama y abre un pull request para revisar cambios antes de integrarlos en `main`.
 
 La configuración actual utiliza `framework: null`, `buildCommand: 'pnpm run build'` y `outputDirectory: 'out'` en `vercel.json`. No cambies el adaptador a Next.js manteniendo `out/`: se publica una exportación estática.
 
-El permiso de GitHub se administra en **Settings → Collaborators**. El acceso a Vercel es independiente: el propietario debe revisar los permisos de la persona y las restricciones de su plan si Vercel requiere autorización para sus despliegues. No se incluyen ni se deben compartir tokens personales de GitHub o Vercel.
+El permiso de GitHub se administra en **Settings → Collaborators**. El acceso a Vercel es independiente. Se verificó el 2 de noviembre de 2026 que el espacio `even16` usa Hobby. Para repositorios privados, [Vercel exige que el autor del commit de despliegue sea el propietario del espacio](https://vercel.com/docs/deployments/troubleshoot-project-collaboration). Dar acceso de escritura en GitHub no elimina esta restricción.
+
+Con este plan, el colaborador debe trabajar en una rama y enviar un pull request. El propietario puede revisarlo e integrarlo con **Create a merge commit**, conservando el historial y generando el commit de integración desde su cuenta. Verifica que el despliegue de ese commit termine en Ready. No se ha probado aún con una segunda persona porque falta su usuario.
+
+Si la persona debe publicar de forma independiente, habrá que decidir un plan y permisos de Vercel compatibles con esa colaboración, o evaluar hacer público el repositorio. No se cambió el plan ni se hizo público el código. No se incluyen ni se deben compartir tokens personales de GitHub o Vercel.
 
 ## Backend: estado actual y ampliaciones
 

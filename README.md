@@ -26,6 +26,8 @@ Este repositorio contiene todo el código existente, los estilos, los textos, la
 
 El repositorio es privado. El propietario debe agregar a la persona en **Settings → Collaborators** con su usuario de GitHub; compartir únicamente el enlace no concede acceso. Una persona con acceso de escritura puede editar desde GitHub, clonar el proyecto o abrirlo en su editor.
 
+GitHub está conectado al proyecto existente de Vercel, con `main` como rama de producción. Los cambios autorizados por Vercel en esa rama generan un despliegue automático. El espacio actual usa el plan Hobby: para repositorios privados, Vercel exige que el autor del commit de despliegue sea el propietario del espacio. Los colaboradores pueden proponer cambios en ramas y pull requests; el propietario debe integrarlos y publicar mediante su cuenta. Véase la guía y la [restricción oficial de colaboración](https://vercel.com/docs/deployments/troubleshoot-project-collaboration).
+
 La versión actual no tiene backend de aplicación, base de datos, autenticación ni panel de administración. El contenido está en JSON y las consultas abren WhatsApp. Se entrega el proyecto completo tal como existe; un backend nuevo se desarrolla dentro de este mismo repositorio cuando se defina su alcance.
 
 ## Editar contenido
