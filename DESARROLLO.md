@@ -52,11 +52,11 @@ La conexión Git de Vercel apunta a este repositorio y a `main` como rama de pro
 
 La configuración actual utiliza `framework: null`, `buildCommand: 'pnpm run build'` y `outputDirectory: 'out'` en `vercel.json`. No cambies el adaptador a Next.js manteniendo `out/`: se publica una exportación estática.
 
-El permiso de GitHub se administra en **Settings → Collaborators**. El acceso a Vercel es independiente. Se verificó el 2 de noviembre de 2026 que el espacio `even16` usa Hobby. Para repositorios privados, [Vercel exige que el autor del commit de despliegue sea el propietario del espacio](https://vercel.com/docs/deployments/troubleshoot-project-collaboration). Dar acceso de escritura en GitHub no elimina esta restricción.
+El repositorio se hizo público el 2 de noviembre de 2026 por indicación del propietario. Cualquiera puede consultar el código, clonarlo y proponer cambios con un fork y un pull request. La escritura directa se administra en **Settings → Collaborators**: se requiere invitar a un usuario específico. No se ha invitado a otra persona porque aún no se proporcionó su usuario de GitHub.
 
-Con este plan, el colaborador debe trabajar en una rama y enviar un pull request. El propietario puede revisarlo e integrarlo con **Create a merge commit**, conservando el historial y generando el commit de integración desde su cuenta. Verifica que el despliegue de ese commit termine en Ready. No se ha probado aún con una segunda persona porque falta su usuario.
+El espacio `even16` usa Hobby. Vercel indica que [la colaboración es gratuita para repositorios públicos](https://vercel.com/docs/deployments/troubleshoot-project-collaboration). La restricción anterior para repositorios privados ya no aplica a la visibilidad actual. No se ha probado un despliegue de una segunda persona; las contribuciones externas pueden requerir aprobación.
 
-Si la persona debe publicar de forma independiente, habrá que decidir un plan y permisos de Vercel compatibles con esa colaboración, o evaluar hacer público el repositorio. No se cambió el plan ni se hizo público el código. No se incluyen ni se deben compartir tokens personales de GitHub o Vercel.
+Se recomienda trabajar en ramas y pull requests, revisar los cambios y comprobar que el despliegue termine en Ready. No se cambió el plan de Vercel. No se incluyen ni se deben compartir tokens personales de GitHub o Vercel.
 
 ## Backend: estado actual y ampliaciones
 
