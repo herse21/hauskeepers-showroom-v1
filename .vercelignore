@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+*.zip
+.env*
+ASSET-SOURCES.json
+README.md
+FUENTES.md
+QA.md
+
+work

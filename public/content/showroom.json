@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "brand": {
+    "name": "hauskeepers",
+    "city": "Mérida, Yucatán",
+    "instagram": "https://www.instagram.com/hauskeepers_hk/",
+    "orange": "#f37231"
+  },
+  "contact": {
+    "phone": "529993340060",
+    "displayPhone": "999 334 0060",
+    "address": "Calle 20, núm. 226 · Col. Juan B. Sosa",
+    "postalCode": "97205",
+    "hours": "Lunes a viernes · 9:00 a 18:00 h",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Hauskeepers%20Calle%2020%20226%20Juan%20B%20Sosa%20Merida",
+    "verifiedOn": "2026-10-21"
+  },
+  "hero": {
+    "eyebrow": "SHOWROOM DIGITAL · MÉRIDA",
+    "title": "Hay más en tu espacio.",
+    "line1": "Hay más",
+    "line2": "en tu espacio.",
+    "description": "Soluciones que cambian tu forma de habitar.",
+    "image": "/assets/warm.webp",
+    "alt": "Interior de cocina con superficies REHAU, madera y una isla clara",
+    "credit": "Inspiración de superficies · REHAU",
+    "tagline": "Descubre lo que tu espacio puede ser."
+  },
+  "promotion": {
+    "enabled": false,
+    "label": "Descubre las novedades del showroom",
+    "solution": "space-tower"
+  },
+  "featured": "merivobox",
+  "solutions": [
+    {
+      "id": "merivobox",
+      "brand": "Blum",
+      "name": "MERIVOBOX",
+      "category": "Movimiento",
+      "title": "El orden viene hacia ti.",
+      "description": "Cajones de extracción total. Una forma más clara de ver y alcanzar lo que guardas.",
+      "benefits": [
+        "Acceso al contenido del cajón",
+        "Opciones de diseño de laterales",
+        "Movimiento suave y estable"
+      ],
+      "image": "/assets/drawer.webp",
+      "alt": "Cajón MERIVOBOX de Blum con laterales metálicos",
+      "video": "/assets/merivobox.mp4",
+      "source": "https://www.blum.com/mx/es/products/boxsystems/merivobox/overview/",
+      "commercialStatus": "Línea Blum confirmada; configuración y disponibilidad por asesor"
+    },
+    {
+      "id": "aventos",
+      "brand": "Blum",
+      "name": "AVENTOS",
+      "category": "Movimiento",
+      "title": "Abre hacia arriba.",
+      "description": "Frentes elevables que dejan libre el acceso al mueble superior. Elige el movimiento adecuado para tu diseño.",
+      "benefits": [
+        "Acceso al mueble superior",
+        "Diferentes formas de apertura",
+        "Cierre suave con BLUMOTION"
+      ],
+      "image": "/assets/lift.webp",
+      "alt": "Módulos con diferentes frentes elevables AVENTOS",
+      "source": "https://www.blum.com/mx/es/products/liftsystems/aventos/overview/",
+      "commercialStatus": "Línea Blum confirmada; configuración y disponibilidad por asesor"
+    },
+    {
+      "id": "servo-drive",
+      "brand": "Blum",
+      "name": "SERVO-DRIVE",
+      "category": "Movimiento",
+      "title": "Un toque. Otro movimiento.",
+      "description": "Apertura eléctrica asistida para aplicaciones compatibles. Consulta qué configuración funciona en tu proyecto.",
+      "benefits": [
+        "Apertura asistida con un ligero toque",
+        "Soluciones para cajones y elevables",
+        "SERVO-DRIVE flex para equipos integrados compatibles"
+      ],
+      "image": "/assets/grafite.webp",
+      "alt": "Cocina de frentes limpios como inspiración para integrar apertura asistida",
+      "imageIsInspiration": true,
+      "source": "https://www.blum.com/mx/es/products/motion-technologies/servo-drive/overview/",
+      "commercialStatus": "SERVO-DRIVE uno, cajones y flex comunicados en Instagram de Hauskeepers"
+    },
+    {
+      "id": "space-tower",
+      "brand": "Blum",
+      "name": "SPACE TOWER",
+      "category": "Almacenamiento",
+      "title": "Todo a la vista. Todo al alcance.",
+      "description": "Una despensa con extraíbles interiores independientes. Acerca lo que necesitas, sin buscar detrás de todo lo demás.",
+      "benefits": [
+        "Extraíbles interiores independientes",
+        "Acceso desde distintos lados",
+        "Organización adaptada al contenido"
+      ],
+      "image": "/assets/storage.webp",
+      "alt": "Vista superior de una despensa SPACE TOWER de Blum con extraíbles abiertos",
+      "source": "https://www.blum.com/mx/es/products/cabinet-applications/space-tower/overview/",
+      "commercialStatus": "SPACE TOWER LEGRABOX Noble Rust comunicado por Hauskeepers; sin afirmar inventario ni promoción vigente"
+    },
+    {
+      "id": "revego",
+      "brand": "Blum",
+      "name": "REVEGO",
+      "category": "Integración",
+      "title": "Ahora lo ves. Ahora lo vives.",
+      "description": "Los frentes se abren y se retraen en un pocket lateral. Una cocina, un estudio o un mueble pueden aparecer cuando los necesitas.",
+      "benefits": [
+        "Frentes que se ocultan en el mueble",
+        "Espacios de usos múltiples",
+        "Tecnología integrada en el pocket"
+      ],
+      "image": "/assets/kitchen.webp",
+      "alt": "Sistema pocket REVEGO de Blum integrado en un mueble",
+      "video": "/assets/revego.mp4",
+      "source": "https://www.blum.com/mx/es/products/pocketsystems/revego/overview/",
+      "commercialStatus": "Línea Blum confirmada; consultar disponibilidad de REVEGO"
+    },
+    {
+      "id": "rauvisio",
+      "brand": "REHAU",
+      "name": "RAUVISIO brilliant",
+      "category": "Materiales",
+      "title": "La luz también es un material.",
+      "description": "Superficies acrílicas para frentes de mobiliario. Explora el color, el brillo y su relación con el resto del espacio.",
+      "benefits": [
+        "Superficies para mobiliario",
+        "Colores y acabados coordinados",
+        "Opciones de alto brillo y mate según colección"
+      ],
+      "image": "/assets/material.webp",
+      "alt": "Cocina con frentes REHAU RAUVISIO brilliant Cubanite",
+      "source": "https://www.rehau.com/mx-es/rauvisio-brilliant-mx",
+      "commercialStatus": "REHAU confirmado en presencia pública; acabados y disponibilidad por asesor"
+    },
+    {
+      "id": "smeg",
+      "brand": "SMEG",
+      "name": "Línea",
+      "category": "Equipamiento",
+      "title": "Parte del espacio. Parte de tu día.",
+      "description": "Equipamiento que conversa con la arquitectura. Explora hornos, parrillas y equipos coordinados para tu cocina.",
+      "benefits": [
+        "Una estética coordinada",
+        "Hornos y equipos integrables",
+        "Selección según las necesidades del proyecto"
+      ],
+      "image": "/assets/smeg.webp",
+      "alt": "Horno SMEG de la estética Línea en un ambiente arquitectónico",
+      "source": "https://www.smeg.com/mx/linea-esteticas/linea",
+      "commercialStatus": "SMEG presente en destacados de Hauskeepers; modelos a confirmar"
+    }
+  ],
+  "materials": [
+    {
+      "id": "cubanite",
+      "name": "Cubanite",
+      "finish": "RAUVISIO brilliant · Alto brillo",
+      "reference": "5338B",
+      "color": "#aaa294",
+      "image": "/assets/material.webp",
+      "alt": "Cocina con superficies RAUVISIO brilliant Cubanite"
+    },
+    {
+      "id": "bianco",
+      "name": "Bianco",
+      "finish": "RAUVISIO brilliant · Alto brillo",
+      "reference": "5000B",
+      "color": "#e6e3dc",
+      "image": "/assets/bianco.webp",
+      "alt": "Vestidor con superficies RAUVISIO brilliant Bianco"
+    },
+    {
+      "id": "grafite",
+      "name": "Grafite",
+      "finish": "RAUVISIO brilliant · Alto brillo",
+      "reference": "2100L",
+      "color": "#454742",
+      "image": "/assets/grafite.webp",
+      "alt": "Cocina con superficies RAUVISIO brilliant Grafite"
+    }
+  ],
+  "inspiration": [
+    {
+      "id": "cocina",
+      "title": "Cocina",
+      "subtitle": "Pensada para cómo te mueves.",
+      "image": "/assets/warm.webp",
+      "alt": "Inspiración de cocina con madera y frentes claros REHAU",
+      "solutions": [
+        "aventos",
+        "space-tower",
+        "rauvisio",
+        "smeg"
+      ]
+    },
+    {
+      "id": "almacenamiento",
+      "title": "Almacenamiento",
+      "subtitle": "Un lugar para cada posibilidad.",
+      "image": "/assets/storage.webp",
+      "alt": "Despensa con cajones extraíbles Blum",
+      "solutions": [
+        "space-tower",
+        "merivobox"
+      ]
+    },
+    {
+      "id": "vestidor",
+      "title": "Clóset y vestidor",
+      "subtitle": "El orden se siente.",
+      "image": "/assets/bianco.webp",
+      "alt": "Vestidor de superficies blancas REHAU",
+      "solutions": [
+        "rauvisio",
+        "merivobox"
+      ]
+    },
+    {
+      "id": "compactos",
+      "title": "Espacios compactos",
+      "subtitle": "El mismo espacio. Más usos.",
+      "image": "/assets/kitchen.webp",
+      "alt": "Cocina oculta con sistema pocket REVEGO",
+      "solutions": [
+        "revego",
+        "aventos"
+      ]
+    },
+    {
+      "id": "mueble",
+      "title": "Mobiliario",
+      "subtitle": "Cada detalle cambia el conjunto.",
+      "image": "/assets/drawer.webp",
+      "alt": "Detalle de cajón MERIVOBOX",
+      "solutions": [
+        "merivobox",
+        "servo-drive",
+        "rauvisio"
+      ]
+    }
+  ],
+  "structure": "reference-film-2026-10-21",
+  "philosophy": {
+    "label": "Nuestra forma de ver el espacio",
+    "text": "Creemos en espacios que te facilitan la vida. En materiales que se sienten. Y en pequeños movimientos que cambian todo."
+  },
+  "process": [
+    {
+      "title": "Tu idea.",
+      "description": "Cuéntanos qué espacio tienes y qué quieres lograr."
+    },
+    {
+      "title": "Las posibilidades.",
+      "description": "Explora movimiento, almacenamiento, materiales y equipamiento."
+    },
+    {
+      "title": "Los detalles.",
+      "description": "Consulta la configuración, aplicación y disponibilidad con un asesor."
+    },
+    {
+      "title": "Tu siguiente paso.",
+      "description": "Visita el showroom, conoce las soluciones y consulta tu proyecto."
+    }
+  ],
+  "selected": [
+    {
+      "id": "merivobox",
+      "label": "Movimiento",
+      "title": "Acerca lo que necesitas.",
+      "image": "/assets/drawer.webp",
+      "alt": "Cajón MERIVOBOX de Blum"
+    },
+    {
+      "id": "space-tower",
+      "label": "Almacenamiento",
+      "title": "Todo tiene otro lugar.",
+      "image": "/assets/storage.webp",
+      "alt": "Almacenamiento interior SPACE TOWER de Blum"
+    },
+    {
+      "id": "revego",
+      "label": "Integración",
+      "title": "Aparece otra posibilidad.",
+      "image": "/assets/kitchen.webp",
+      "alt": "Sistema pocket REVEGO de Blum"
+    },
+    {
+      "id": "rauvisio",
+      "label": "Materialidad",
+      "title": "El carácter se siente.",
+      "image": "/assets/material.webp",
+      "alt": "Cocina con superficies REHAU"
+    },
+    {
+      "id": "smeg",
+      "label": "Equipamiento",
+      "title": "Todo habla el mismo idioma.",
+      "image": "/assets/smeg.webp",
+      "alt": "Horno SMEG Línea"
+    }
+  ]
+}
