@@ -1,4 +1,64 @@
 {
+  "aventosCad": {
+    "source": "Blum E-SERVICES, Búsqueda individual de producto, STEP MEDIO",
+    "liftMechanism": "22K2500_45505919.step",
+    "darkGrayCovers": ["22K8000.NA_40349819.step", "22K8000.NA_40494494.step"],
+    "woodFrontBracket": "20S4200_43181434.step",
+    "localAsset": "/assets/blum-aventos-hk-top.glb",
+    "processing": "Open CASCADE triangulation and Meshopt compression. Three.js animates the six-piece mechanism using the STEP pin centers, with the front opening to 107°. The showroom uses a reference configuration."
+  },
+  "servoDriveCad": {
+    "source": "Blum E-SERVICES, Búsqueda individual de producto, STEP MEDIO",
+    "driveUnit": "Z10A3000.04_46294260.step",
+    "movento500mm40kg": ["760H5000S_48346342.step", "760H5000S_49027541.step"],
+    "localAsset": "/assets/blum-servo-drive.glb",
+    "processing": "Open CASCADE triangulation and Meshopt compression. The simplified STEP faces are grouped into the drive housing, the lever and the stages of each runner. Three.js simulates the lever and extension. The wood drawer, cabinet and support profile are built for the showroom."
+  },
+  "spaceTowerCad": {
+    "source": "Blum E-SERVICES, Configurador de productos, Recopilación (3D), STEP MEDIO",
+    "assembly": "SPACE-TOWER-LEGRABOX-LEGRABOX-pure-altura.STEP",
+    "hinge": "71B7550_46597865.step",
+    "localAsset": "/assets/blum-space-tower.glb",
+    "losslessTransferAsset": "/assets/blum-space-tower.glb.gz",
+    "configuration": "562 mm clear width, 1990 mm cabinet height, 500 mm nominal runner length, LEGRABOX special edition Noble Rust, four C drawers with low Blum inserts and one low drawer, four nickel-plated screw-on CLIP top BLUMOTION hinges.",
+    "processing": "Open CASCADE triangulation and Meshopt compression of the official assembly, grouped by door, hinge components, fixed guides, sliding components and five drawers. The individual hinge STEP verifies the seven component identities. Web materials and movement are authored in the showroom."
+  },
+  "kitchenEnvironment": {
+    "limestone": { "source": "/assets/kitchen-hardware-v4.webp", "localAsset": "/assets/kitchen-limestone.webp", "processing": "The existing 256 × 256 material sample, cropped offline and encoded as lossless WebP." },
+    "plaster": { "source": "https://polyhaven.com/a/white_plaster_02", "license": "CC0", "localAssets": ["/assets/kitchen-white_plaster_02-color.webp", "/assets/kitchen-white_plaster_02-normal.webp"] },
+    "floor": { "source": "https://polyhaven.com/a/wooden_floor_02", "license": "CC0", "localAssets": ["/assets/kitchen-wooden_floor_02-color.webp", "/assets/kitchen-wooden_floor_02-normal.webp"] },
+    "windowAndReflections": { "source": "https://polyhaven.com/a/studio_garden", "license": "CC0", "localAsset": "/assets/kitchen-studio-garden.hdr" }
+  },
+  "blumThreeReview": {
+    "route": "/showroom-3d/",
+    "geometry": "Blum E-SERVICES reference CAD for the featured hardware. Cabinetry, finishes and interactions are authored for the web showroom.",
+    "servoDrive": [
+      "https://www.blum.com/mx/es/products/runnersystems/movento/assembly/",
+      "https://www.blum.com/file/me161419_pr_an_fi_bau?country=mx&language=es",
+      "https://d2.blum.com/services/BEC003/kla0031-ba-139_ba_dok_bau_%24sen_%24aof_%24v7.pdf"
+    ],
+    "aventos": [
+      "https://www.blum.com/mx/es/products/liftsystems/aventos-hk-top/assembly/",
+      "https://www.blum.com/file/me59461680_pr_an_fi_bau?country=mx&language=es",
+      "https://d2.blum.com/services/BEC003/aventoshktoptech_ep_dok_bus_%24sen-us_%24aof_%24v5.pdf"
+    ],
+    "spaceTower": [
+      "https://publications.blum.com/2026/catalogue/en/78/",
+      "https://publications.blum.com/2024/catalogue/es/231/",
+      "https://www.blum.com/mx/es/services/planning-construction-product-selection/product-configurator/",
+      "https://www.blum.com/mx/es/products/hingesystems/clip-top-blumotion/overview/",
+      "https://www.blum.com/file/lbx0014-space-tower_pr_rf_fi_bau?country=mx&language=es",
+      "https://www.blum.com/file/lbx005-montage_mo_an_fi_bau?country=mx&language=es",
+      "https://d2.blum.com/services/BEC003/me188317_ep_dok_bau_%24ses-mx_%24aof_%24v1.pdf",
+      "https://d2.blum.com/services/BEC003/lbx0264-ep-390_ep_dok_bau_%24ses-mx_%24aof_%24v5.pdf"
+    ],
+    "nobleRust": {
+      "source": "https://www.blum.com/mx/es/products/boxsystems/legrabox/overview/special-edition/",
+      "assetUrl": "https://www.blum.com/images/1167/657/4246498/corporate/media/bilder/produkte/boxsysteme/legrabox-design/lbx_web_bilder_25_16:9.png",
+      "localAsset": "/assets/blum-noble-rust.webp",
+      "processing": "Cropped exterior finish sample from Blum's product illustration for the color map of the outside drawer sides."
+    }
+  },
   "kitchen": "https://www.blum.com/images/1167/657/4215257/corporate/media/bilder/produkte/pocketsysteme/me26502293_16:9.jpg",
   "storage": "https://www.blum.com/corporate/media/bilder/produkte/boxsysteme/LBX0311_AA_FRD_FO_BAU_-SALL_-APR6I_-V1_4:3.jpg",
   "aventos": "https://www.blum.com/corporate/media/bilder/produkte/klappensysteme/aventos-top/me96878552_aa_fot_fo_bau_-sall_-amc_-v1_3:2.jpg",
@@ -205,6 +265,26 @@
       "qa": "work/seedance/unified-v7/aventos-web-qa.json",
       "verifiedLocally": true,
       "published": false
+    },
+    "hardwareCorrections": {
+      "servoDrive": {
+        "asset": "/assets/kitchen-servo-drive-v8-720p.mp4",
+        "previous": "/assets/kitchen-servo-drive-v7-720p.mp4",
+        "reference": "https://www.blum.com/mx/es/products/runnersystems/movento/assembly/",
+        "edit": "Continued the wooden drawer side over the exposed lateral slide to depict concealed mounting."
+      },
+      "aventos": {
+        "asset": "/assets/kitchen-aventos-v8-720p.mp4",
+        "previous": "/assets/kitchen-aventos-v7-720p.mp4",
+        "reference": "https://www.blum.com/mx/es/products/liftsystems/aventos-hk-top/assembly/",
+        "edit": "Composited compact lateral covers and articulated arms under the moving front, based on the HK top assembly reference."
+      },
+      "spaceTower": {
+        "asset": "/assets/kitchen-space-tower-v9-720p.mp4",
+        "previous": "/assets/kitchen-space-tower-v8-720p.mp4",
+        "reference": "https://d2.blum.com/services/BEC003/lbx0264-ep-390_ep_dok_bau_%24sen-ph_%24aof_%24v5.pdf#page=34",
+        "edit": "Graded the five interior front panels to a graphite tone based on the LEGRABOX pure example, retaining the end caps and the door occlusion."
+      }
     },
     "spaceTowerRejected": {
       "asset": "/assets/kitchen-space-tower-v7-720p.mp4",

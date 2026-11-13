@@ -103,7 +103,7 @@ export const kitchenProducts: KitchenProduct[] = [
       mobile: { focusX: .475, focusY: .50, zoom: 1.3, screenX: .52, screenY: .40 },
     },
     clip: {
-      status: 'ready', video: '/assets/kitchen-servo-drive-v7-720p.mp4', width: 1280, height: 720,
+      status: 'ready', video: '/assets/kitchen-servo-drive-v8-720p.mp4', width: 1280, height: 720,
       wideFrame: 0, intro: { start: 0, end: 23 / 24 }, opening: { start: 23 / 24, end: 119 / 24 },
       closing: { start: 120 / 24, end: 216 / 24 }, exit: { start: 216 / 24, end: 239 / 24 },
       actionPlaybackRate: 2.35,
@@ -125,18 +125,18 @@ export const kitchenProducts: KitchenProduct[] = [
     },
   },
   {
-    id: 'aventos', anchor: 'aventos', brand: 'Blum', name: 'AVENTOS',
+    id: 'aventos', anchor: 'aventos', brand: 'Blum', name: 'AVENTOS HK top',
     title: 'Más espacio.\nMás libertad.', description: 'Una nueva manera de abrir.',
     detail: 'Frentes que se elevan para dejar libre el acceso al mueble superior.',
     action: 'Eleva el frente', specs: ['Acceso libre al mueble superior', 'Cierre suave con BLUMOTION'],
-    source: 'https://www.blum.com/mx/es/products/liftsystems/aventos/overview/',
+    source: 'https://www.blum.com/mx/es/products/liftsystems/aventos-hk-top/assembly/',
     hotspot: { x: .638, y: .196 },
     camera: {
       desktop: { focusX: .638, focusY: .196, zoom: 2, screenX: .65, screenY: .43 },
       mobile: { focusX: .638, focusY: .196, zoom: 1.55, screenX: .52, screenY: .38 },
     },
     clip: {
-      status: 'ready', video: '/assets/kitchen-aventos-v7-720p.mp4', width: 1280, height: 720,
+      status: 'ready', video: '/assets/kitchen-aventos-v8-720p.mp4', width: 1280, height: 720,
       wideFrame: 0, intro: { start: 0, end: 23 / 24 }, opening: { start: 23 / 24, end: 119 / 24 },
       closing: { start: 120 / 24, end: 216 / 24 }, exit: { start: 216 / 24, end: 239 / 24 },
       actionPlaybackRate: 2.1,
@@ -162,7 +162,7 @@ export const kitchenProducts: KitchenProduct[] = [
     id: 'space-tower', anchor: 'visita', brand: 'Blum', name: 'SPACE TOWER',
     title: 'Todo a la vista.\nTodo a tu alcance.', description: 'Hay cosas que tienes que abrir para entender.',
     detail: 'Cajones LEGRABOX independientes. Todo a la vista, nivel por nivel.',
-    action: 'Abre la despensa', specs: ['Extraíbles independientes', 'LEGRABOX Noble Rust'],
+    action: 'Abre la despensa', specs: ['Extraíbles independientes', 'Frentes interiores LEGRABOX'],
     source: 'https://www.blum.com/mx/es/products/cabinet-applications/space-tower/overview/',
     hotspot: { x: .816, y: .298 },
     camera: {
@@ -170,7 +170,7 @@ export const kitchenProducts: KitchenProduct[] = [
       mobile: { focusX: .816, focusY: .298, zoom: 1.4, screenX: .60, screenY: .39 },
     },
     clip: {
-      status: 'ready', video: '/assets/kitchen-space-tower-v8-720p.mp4', width: 1280, height: 720,
+      status: 'ready', video: '/assets/kitchen-space-tower-v9-720p.mp4', width: 1280, height: 720,
       wideFrame: 0, intro: { start: 0, end: 35 / 24 }, opening: { start: 35 / 24, end: 119 / 24 },
       closing: { start: 120 / 24, end: 204 / 24 }, exit: { start: 204 / 24, end: 239 / 24 },
       actionPlaybackRate: 1.7,

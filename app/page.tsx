@@ -1,11 +1,12 @@
-import { InteractiveShowroom } from '../components/interactive-showroom';
+import { KitchenShowroom3D } from '../components/kitchen-showroom-3d';
 import { BrandJourney } from '../components/brand-journey';
 import { Arrow } from '../components/experience';
 import { BLUM_CONFIGURATOR } from '../lib/brand-resources';
+import './kitchen-three.css';
 
 export default function Page() {
   return <>
-    <InteractiveShowroom />
+    <KitchenShowroom3D />
     <section id="configurador" className="configurator-section" aria-labelledby="configurator-title">
       <img className="configurator-image" src="/assets/blum-configurator-workspace-hd.webp" alt="Espacio de trabajo del configurador de Blum con el modelo 3D de un cajón" width={1448} height={1086} loading="lazy" decoding="async" />
       <div className="configurator-copy">

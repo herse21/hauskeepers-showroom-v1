@@ -20,19 +20,6 @@
 .logo-stroke { transform-box: fill-box; transform-origin: bottom left; transition: transform .45s cubic-bezier(.22,.61,.36,1); }
 .hk-logo-anchor:hover .logo-stroke-two { transform: translate(3px, -3px); }
 .hk-logo-anchor:hover .logo-stroke-three { transform: rotate(8deg); }
-.hk-header.home .logo-mark {
-  transform-origin: 9.5% 50%;
-  animation: hk-mark-assemble 1.65s cubic-bezier(.22,.61,.36,1) both;
-}
-.hk-header.home .logo-wordmark { animation: hk-name-reveal 1.65s cubic-bezier(.22,.61,.36,1) both; }
-@keyframes hk-mark-assemble {
-  0%, 18% { transform: translateX(40%) scale(1.35); }
-  100% { transform: translateX(0) scale(1); }
-}
-@keyframes hk-name-reveal {
-  0%, 24% { opacity: 0; clip-path: inset(0 0 0 100%); transform: translateX(6%); }
-  100% { opacity: 1; clip-path: inset(0); transform: translateX(0); }
-}
 .hk-header {
   position: fixed;
   inset: 0 0 auto;
@@ -69,13 +56,13 @@
 }
 .hk-header.home .hk-logo-anchor > .logo {
   position: fixed;
-  left: var(--hk-logo-x, 50vw);
-  top: var(--hk-logo-y, 50svh);
-  width: var(--hk-logo-width, min(74vw, 960px, 108svh));
-  transform: translate3d(-50%, -50%, 0);
+  left: 50vw;
+  top: 50svh;
+  width: min(74vw, 960px, 108svh);
+  transform: translate3d(-50%, -50%, 0) var(--hk-logo-transform, scale(1));
   color: var(--orange);
   filter: drop-shadow(0 2px 14px #35211124);
-  will-change: transform, width;
+  will-change: transform;
 }
 .hk-header.home .logo::before {
   content: '';

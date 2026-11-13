@@ -1,0 +1,81 @@
+.blum-review {
+  padding: clamp(96px, 11vw, 145px) var(--gutter) 72px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.blum-review-top {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.blum-review-top h1 {
+  margin-top: 15px;
+  font-size: clamp(44px, 6.3vw, 94px);
+  line-height: .98;
+}
+
+.blum-review-top a, .blum-review-source, .blum-review-compare {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.blum-review-top p, .blum-review-details p { max-width: 37ch; color: var(--muted); }
+
+.blum-review-products {
+  display: flex;
+  gap: 8px 24px;
+  flex-wrap: wrap;
+  padding: 14px 0;
+}
+
+.blum-review-products button {
+  min-height: 44px;
+  padding: 0 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.blum-review-products button[aria-pressed=true] { border-color: #a64814; }
+
+.blum-review-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(240px, 1fr);
+  gap: clamp(26px, 4vw, 64px);
+  align-items: start;
+}
+
+.blum-review-stage {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1.35;
+  background: radial-gradient(ellipse at 50% 32%, #f3e8da, #d3c4b2);
+  overflow: hidden;
+}
+
+.blum-review-canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; }
+.blum-review-caption { position: absolute; bottom: 14px; left: 14px; padding: 4px 7px; background: #f5f3eee8; font-size: 12px; }
+.blum-review-error { position: absolute; inset: 20px 20px auto; padding: 16px; background: var(--paper); }
+.blum-review-details { padding-top: clamp(4px, 3vw, 44px); }
+.blum-review-details h2 { font-size: clamp(36px, 4vw, 58px); }
+.blum-review-details p { margin: 18px 0 24px; }
+.blum-review-controls { display: grid; gap: 16px; justify-items: start; margin-bottom: 20px; }
+.blum-review-primary, .blum-review-secondary, .blum-review-drawers button { min-height: 44px; padding: 8px 12px; border: 1px solid currentColor; }
+.blum-review-primary { background: var(--ink); color: var(--paper); padding-inline: 18px; }
+.blum-review-drawers { display: flex; flex-wrap: wrap; gap: 8px; }
+.blum-review-drawers button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
+.blum-review-controls button:disabled { opacity: .5; }
+.blum-review-source, .blum-review-compare { display: flex; align-items: center; min-height: 44px; padding: 0; width: fit-content; }
+.blum-review-previous { margin-top: 28px; }
+.blum-review-previous video { width: min(100%, 960px); }
+
+@media (max-width: 720px) {
+  .blum-review-top { align-items: start; flex-direction: column; gap: 15px; }
+  .blum-review-layout { grid-template-columns: minmax(0, 1fr); }
+  .blum-review-stage { aspect-ratio: 1.04; }
+  .blum-review-products { gap: 4px 14px; }
+  .blum-review-products button { font-size: 13px; }
+}

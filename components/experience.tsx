@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import { content as initial, type Content, type Solution } from '../lib/content';
 import { track, whatsappUrl } from '../lib/analytics';
 import { BLUM_CONFIGURATOR } from '../lib/brand-resources';
+import { heroDockProgress, observeKitchenScroll, scheduleKitchenFrame } from '../lib/kitchen-motion';
 
 const DataContext = createContext(initial);
 const DetailContext = createContext<(id: string, origin?: string) => void>(() => {});
@@ -118,38 +119,47 @@ export function Header() {
       return;
     }
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    let frame = 0;
-    const clamp = (value: number) => Math.max(0, Math.min(1, value));
-    const update = () => {
-      frame = 0;
-      const hero = document.querySelector<HTMLElement>('.cinema-hero');
-      const target = anchor.getBoundingClientRect();
-      const progress = hero ? clamp(window.scrollY / Math.max(1, hero.offsetHeight - window.innerHeight)) : 1;
-      const eased = progress * progress * (3 - 2 * progress);
-      const amount = reduced.matches ? (progress >= 1 ? 1 : 0) : eased;
-      const start = 1 - amount;
-      anchor.style.setProperty('--hk-logo-x', `calc(50vw * ${start} + ${(target.left + target.width / 2) * amount}px)`);
-      anchor.style.setProperty('--hk-logo-y', `calc(50svh * ${start} + ${(target.top + target.height / 2) * amount}px)`);
-      anchor.style.setProperty('--hk-logo-width', `calc(min(74vw, 960px, 108svh) * ${start} + ${target.width * amount}px)`);
-      anchor.style.setProperty('--hk-logo-halo', `${Math.max(.4, start)}`);
-      header.classList.toggle('is-docked', progress >= .98);
-    };
-    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule, { passive: true });
-    reduced.addEventListener('change', schedule);
-    const resizeObserver = new ResizeObserver(schedule);
     const hero = document.querySelector<HTMLElement>('.cinema-hero');
-    if (hero) resizeObserver.observe(hero);
-    return () => {
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      reduced.removeEventListener('change', schedule);
-      resizeObserver.disconnect();
-      cancelAnimationFrame(frame);
+    const stage = document.querySelector<HTMLElement>('.kitchen-stage');
+    let heroHeight = 0, stageHeight = 0;
+    let deltaX = 0, deltaY = 0, targetScale = 1;
+    let previousAmount = -1;
+    const measure = () => {
+      const target = anchor.getBoundingClientRect();
+      const width = window.innerWidth;
+      stageHeight = stage?.clientHeight ?? window.innerHeight;
+      heroHeight = hero?.offsetHeight ?? 0;
+      deltaX = target.left + target.width / 2 - width / 2;
+      deltaY = target.top + target.height / 2 - stageHeight / 2;
+      targetScale = target.width / Math.min(width * .74, 960, stageHeight * 1.08);
+      previousAmount = -1;
+      scheduleKitchenFrame();
     };
-  }, [home, path, menu]);
+    const update = (scrollY: number) => {
+      const progress = hero ? heroDockProgress(scrollY, heroHeight, stageHeight) : 1;
+      const amount = reduced.matches ? Number(progress >= 1) : progress;
+      if (amount === previousAmount) return;
+      previousAmount = amount;
+      header.classList.toggle('is-docked', amount >= .98);
+      anchor.style.setProperty('--hk-logo-transform', `translate3d(${deltaX * amount}px, ${deltaY * amount}px, 0) scale(${1 + (targetScale - 1) * amount})`);
+      anchor.style.setProperty('--hk-logo-halo', String(Math.max(.4, 1 - amount)));
+    };
+    const unsubscribe = observeKitchenScroll(update);
+    measure();
+    update(window.scrollY);
+    window.addEventListener('resize', measure, { passive: true });
+    reduced.addEventListener('change', scheduleKitchenFrame);
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(anchor);
+    if (hero) resizeObserver.observe(hero);
+    if (stage) resizeObserver.observe(stage);
+    return () => {
+      unsubscribe();
+      window.removeEventListener('resize', measure);
+      reduced.removeEventListener('change', scheduleKitchenFrame);
+      resizeObserver.disconnect();
+    };
+  }, [home, path]);
 
   useEffect(() => {
     if (!menu) return;

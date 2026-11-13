@@ -4,9 +4,9 @@ Repositorio: https://github.com/herse21/hauskeepers-showroom-v1
 
 URL del proyecto existente: https://hauskeepers-showroom-v1.vercel.app/
 
-La portada abre con el hero integrado al recorrido por la cocina con SERVO-DRIVE, AVENTOS y SPACE TOWER. Después aparece el configurador Blum, seguido de Blum, REHAU, Häfele y Stone Fusion. Los puntos interactivos permiten consultar información y cotizar por WhatsApp. El logo SVG aparece una sola vez y pasa del centro al encabezado. Las fichas y flechas cambian de posición según el formato. En celular vertical el producto conserva todo el ancho del video y una ambientación de la misma escena cubre el fondo. La flecha sigue el movimiento del video al pausarlo o cambiar de dirección.
+La portada abre con una cocina en Three.js. El desplazamiento mueve la cámara. Los controles sobre cada mueble abren el cajón SERVO-DRIVE, el frente AVENTOS HK top y la puerta de SPACE TOWER. La despensa da acceso individual a sus cinco cajones y los recoge antes de cerrar la puerta. Después del recorrido aparecen el configurador Blum y las secciones de marcas.
 
-**Estado de los medios — revisión local terminada:** SERVO-DRIVE y AVENTOS usan sus tomas v7. SPACE TOWER usa `kitchen-space-tower-v8-720p.mp4`, con cinco cajones interiores y una transición de cuadro completo desde la cocina común. SERVO-DRIVE y AVENTOS abren y cierran desde puntos intermedios; el control sigue el frente y la flecha sigue la apertura medida. SPACE TOWER tiene controles separados para puerta y cajón, sin flechas. Los originales se guardaron y los montajes rechazados se retiraron. Build y revisión visual en celular, tableta y escritorio correctos. Esta revisión sigue siendo local; no se ha publicado en Vercel.
+**Estado de los medios.** La portada muestra un render de la cocina actual mientras Three.js y sus materiales inician. Si falla la carga, la portada conserva ese render y muestra un aviso. Los herrajes AVENTOS HK top, SERVO-DRIVE con MOVENTO y SPACE TOWER usan STEP oficiales de Blum E-SERVICES convertidos a GLB con Meshopt. Las referencias de los STEP están en `ASSET-SOURCES.json`. El mobiliario y las animaciones se prepararon para el showroom.
 
 ## Ejecutar
 
@@ -27,9 +27,13 @@ Las rutas y los recursos se generan al compilar y se sirven desde la CDN. El nav
 
 ## Dónde editar
 
-- `components/interactive-showroom.tsx`: recorrido continuo, cámara, puntos interactivos y reproducción por segmentos.
-- `components/kitchen-media.ts`: fotografía común, productos, posiciones, encuadres y estados de los tres clips.
-- `app/interactive-showroom.css`: composición del recorrido y adaptación móvil.
+La vista local `/showroom-3d/` contiene tres demostraciones y los clips anteriores para comparación. El modelo de SPACE TOWER se carga desde `public/assets/blum-space-tower.glb`. Su origen y las medidas de referencia se registran en `ASSET-SOURCES.json`. Los pivotes y las piezas móviles se vinculan en `lib/blum-space-tower.ts`.
+
+Si se reemplaza el modelo de SPACE TOWER, se debe regenerar su archivo de transferencia gzip sin pérdida con `node -e "const fs = require('node:fs'); const zlib = require('node:zlib'); const path = 'public/assets/blum-space-tower.glb'; fs.writeFileSync(path + '.gz', zlib.gzipSync(fs.readFileSync(path), { level: 9 }));"`.
+
+- `components/kitchen-showroom-3d.tsx`: capítulos, progreso de scroll, controles manuales y recuperación sin WebGL.
+- `lib/blum-review-scene.ts`: cocina, materiales, iluminación, cámaras y movimiento de los tres mecanismos.
+- `app/kitchen-three.css`: interfaz de la portada y adaptación móvil.
 - `app/page.tsx`: portada y acceso al configurador de Blum.
 - `components/brand-journey.tsx` y `app/brand-journey.css`: fotografías, navegación y transiciones entre marcas.
 - `components/experience.tsx` y `app/shell.css`: logo, encabezado, pie, fichas y controles compartidos.
@@ -41,7 +45,7 @@ Las rutas y los recursos se generan al compilar y se sirven desde la CDN. El nav
 
 ## Medios y continuidad
 
-Antes de integrar cambios en la portada, comprueba en el navegador el avance del video al deslizar, la apertura y el cierre de los tres muebles y la sincronización de las fichas con sus flechas. Repite la revisión en escritorio y celular y verifica los fotogramas visibles.
+Antes de integrar cambios en la portada, comprueba el recorrido hacia delante y hacia atrás, la apertura y el cierre manual de los tres mecanismos y el orden de puerta y cajón de SPACE TOWER. Repite la revisión en escritorio y celular.
 
 La cocina común vigente es `public/assets/kitchen-hardware-v4.webp` (1672×941), una sola ilustración de cocina con isla de dos cajones. Los originales y sus entradas de edición se conservan. SERVO-DRIVE y AVENTOS se generaron a partir de recortes de la cocina común. SPACE TOWER recupera una toma anterior con cinco cajones y se enlaza al mismo plano general. Sus tiempos y puntos se midieron después de inspeccionar cada archivo. Cada derivado web tiene 240 fotogramas a 24 fps, sin audio, con entrada y salida al mismo plano general. Un futuro clip todavía no recibido debe conservar sus campos en `null`.
 

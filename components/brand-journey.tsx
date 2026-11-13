@@ -6,7 +6,7 @@ import { BLUM_CONFIGURATOR } from '../lib/brand-resources';
 
 const brands = [
   { name: 'Blum', tone: 'blum', title: 'El movimiento se siente.', text: 'Abrir. Cerrar. Descubrir nuevas posibilidades.', image: '/assets/merivobox-premium.webp', alt: 'Cajón MERIVOBOX de Blum en una cocina', href: BLUM_CONFIGURATOR, label: 'Configura con Blum' },
-  { name: 'REHAU', tone: 'rehau', title: 'El diseño empieza en la superficie.', text: 'Texturas y acabados para imaginar tu espacio.', image: '/assets/grafite.webp', alt: 'Cocina con frentes brillantes en acabado grafito de REHAU', href: 'https://www.rehau.com/mx-es/division-muebles', label: 'Explora REHAU' },
+  { name: 'REHAU', tone: 'rehau', title: 'El diseño empieza en la superficie.', text: 'Texturas y acabados para imaginar tu espacio.', image: '/assets/grafite.webp', alt: 'Cocina con frentes brillantes en acabado grafito de REHAU', href: '', solution: 'conocer los acabados', label: 'Consulta por WhatsApp' },
   { name: 'Häfele', tone: 'hafele', title: 'El detalle hace la diferencia.', text: 'Conversemos sobre las soluciones para tu proyecto.', image: '/assets/hafele-loox-workspace.jpg', alt: 'Iluminación Häfele Loox integrada bajo un estante de madera', href: '', label: 'Explora las posibilidades' },
   { name: 'Stone Fusion', tone: 'stone', title: 'Materiales para sentir.', text: 'Encuentra el acabado que va con tu espacio.', image: '/assets/stone-surface-reference.jpg', alt: 'Fotografía de inspiración de una barra de piedra verde', href: '', label: 'Descubre los acabados' },
 ];
@@ -75,7 +75,7 @@ export function BrandJourney() {
         <div className="brand-journey-copy">
           <div className="brand-journey-name">{brand.name === 'Blum' ? <BrandMark brand="Blum" /> : brand.name}</div>
           <h2>{brand.title}</h2><p>{brand.text}</p>
-          {brand.href ? <a className="brand-journey-action" href={brand.href} target="_blank" rel="noopener noreferrer">{brand.label}</a> : <WhatsApp section="marcas" brand={brand.name} className="brand-journey-action">{brand.label}</WhatsApp>}
+          {brand.href ? <a className="brand-journey-action" href={brand.href} target="_blank" rel="noopener noreferrer">{brand.label}</a> : <WhatsApp section="marcas" brand={brand.name} solution={brand.solution} className="brand-journey-action">{brand.label}</WhatsApp>}
         </div>
       </article>)}
       <div className="brand-journey-shade" aria-hidden="true" />
