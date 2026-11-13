@@ -4,7 +4,7 @@
     "name": "hauskeepers",
     "city": "Mérida, Yucatán",
     "instagram": "https://www.instagram.com/hauskeepers_hk/",
-    "orange": "#f37231"
+    "orange": "#dc7536"
   },
   "contact": {
     "phone": "529993340060",
@@ -13,7 +13,7 @@
     "postalCode": "97205",
     "hours": "Lunes a viernes · 9:00 a 18:00 h",
     "maps": "https://www.google.com/maps/search/?api=1&query=Hauskeepers%20Calle%2020%20226%20Juan%20B%20Sosa%20Merida",
-    "verifiedOn": "2026-10-21"
+    "verifiedOn": "2026-11-09"
   },
   "hero": {
     "eyebrow": "SHOWROOM DIGITAL · MÉRIDA",
@@ -21,17 +21,22 @@
     "line1": "Hay más",
     "line2": "en tu espacio.",
     "description": "Soluciones que cambian tu forma de habitar.",
-    "image": "/assets/warm.webp",
-    "alt": "Interior de cocina con superficies REHAU, madera y una isla clara",
-    "credit": "Inspiración de superficies · REHAU",
-    "tagline": "Descubre lo que tu espacio puede ser."
+    "image": "/assets/kitchen-hardware-v4.webp",
+    "alt": "Cocina con frentes integrados para SERVO-DRIVE flex, AVENTOS y SPACE TOWER",
+    "credit": "Visualización de herrajes",
+    "tagline": "Descubre lo que tu espacio puede ser.",
+    "video": "",
+    "videoWidth": 1280,
+    "videoHeight": 720,
+    "source": "https://www.instagram.com/hauskeepers_hk/",
+    "license": ""
   },
   "promotion": {
     "enabled": false,
     "label": "Descubre las novedades del showroom",
     "solution": "space-tower"
   },
-  "featured": "merivobox",
+  "featured": "servo-drive",
   "solutions": [
     {
       "id": "merivobox",
@@ -45,8 +50,8 @@
         "Opciones de diseño de laterales",
         "Movimiento suave y estable"
       ],
-      "image": "/assets/drawer.webp",
-      "alt": "Cajón MERIVOBOX de Blum con laterales metálicos",
+      "image": "/assets/merivobox-premium.webp",
+      "alt": "Persona cocinando junto a un cajón MERIVOBOX de Blum abierto con utensilios",
       "video": "/assets/merivobox.mp4",
       "source": "https://www.blum.com/mx/es/products/boxsystems/merivobox/overview/",
       "commercialStatus": "Línea Blum confirmada; configuración y disponibilidad por asesor"
@@ -73,26 +78,26 @@
       "brand": "Blum",
       "name": "SERVO-DRIVE",
       "category": "Movimiento",
-      "title": "Un toque. Otro movimiento.",
-      "description": "Apertura eléctrica asistida para aplicaciones compatibles. Consulta qué configuración funciona en tu proyecto.",
+      "title": "Un toque. Y se abre.",
+      "description": "Un ligero toque en el frente activa la apertura eléctrica de cajones y módulos extraíbles sin tiradores.",
       "benefits": [
-        "Apertura asistida con un ligero toque",
-        "Soluciones para cajones y elevables",
-        "SERVO-DRIVE flex para equipos integrados compatibles"
+        "Apertura eléctrica con un ligero toque",
+        "Diseño sin tiradores",
+        "Cierre suave y silencioso con BLUMOTION"
       ],
-      "image": "/assets/grafite.webp",
-      "alt": "Cocina de frentes limpios como inspiración para integrar apertura asistida",
+      "image": "/assets/kitchen-hardware-v4.webp",
+      "alt": "Cajones grises sin tiradores al fondo de la cocina; visualización de referencia",
       "imageIsInspiration": true,
-      "source": "https://www.blum.com/mx/es/products/motion-technologies/servo-drive/overview/",
-      "commercialStatus": "SERVO-DRIVE uno, cajones y flex comunicados en Instagram de Hauskeepers"
+      "source": "https://www.blum.com/mx/es/products/motion-technologies/servo-drive/servo-drive-pullouts/programme/",
+      "commercialStatus": "Aplicación en cajón solicitada por el usuario el 10 de noviembre; características verificadas en Blum. El video rechazado de SERVO-DRIVE flex no se usa."
     },
     {
       "id": "space-tower",
       "brand": "Blum",
       "name": "SPACE TOWER",
       "category": "Almacenamiento",
-      "title": "Todo a la vista. Todo al alcance.",
-      "description": "Una despensa con extraíbles interiores independientes. Acerca lo que necesitas, sin buscar detrás de todo lo demás.",
+      "title": "Cada nivel, a tu alcance.",
+      "description": "Despensa con extraíbles interiores independientes. Conoce LEGRABOX en acabado Noble Rust.",
       "benefits": [
         "Extraíbles interiores independientes",
         "Acceso desde distintos lados",
@@ -101,7 +106,7 @@
       "image": "/assets/storage.webp",
       "alt": "Vista superior de una despensa SPACE TOWER de Blum con extraíbles abiertos",
       "source": "https://www.blum.com/mx/es/products/cabinet-applications/space-tower/overview/",
-      "commercialStatus": "SPACE TOWER LEGRABOX Noble Rust comunicado por Hauskeepers; sin afirmar inventario ni promoción vigente"
+      "commercialStatus": "SPACE TOWER LEGRABOX Noble Rust confirmado en el reel Dd9dObfROZi; sin afirmar inventario ni promoción vigente."
     },
     {
       "id": "revego",
@@ -115,8 +120,8 @@
         "Espacios de usos múltiples",
         "Tecnología integrada en el pocket"
       ],
-      "image": "/assets/kitchen.webp",
-      "alt": "Sistema pocket REVEGO de Blum integrado en un mueble",
+      "image": "/assets/revego-premium.webp",
+      "alt": "Persona junto a una isla de cocina, con el sistema pocket REVEGO de Blum abierto al fondo",
       "video": "/assets/revego.mp4",
       "source": "https://www.blum.com/mx/es/products/pocketsystems/revego/overview/",
       "commercialStatus": "Línea Blum confirmada; consultar disponibilidad de REVEGO"
@@ -137,23 +142,6 @@
       "alt": "Cocina con frentes REHAU RAUVISIO brilliant Cubanite",
       "source": "https://www.rehau.com/mx-es/rauvisio-brilliant-mx",
       "commercialStatus": "REHAU confirmado en presencia pública; acabados y disponibilidad por asesor"
-    },
-    {
-      "id": "smeg",
-      "brand": "SMEG",
-      "name": "Línea",
-      "category": "Equipamiento",
-      "title": "Parte del espacio. Parte de tu día.",
-      "description": "Equipamiento que conversa con la arquitectura. Explora hornos, parrillas y equipos coordinados para tu cocina.",
-      "benefits": [
-        "Una estética coordinada",
-        "Hornos y equipos integrables",
-        "Selección según las necesidades del proyecto"
-      ],
-      "image": "/assets/smeg.webp",
-      "alt": "Horno SMEG de la estética Línea en un ambiente arquitectónico",
-      "source": "https://www.smeg.com/mx/linea-esteticas/linea",
-      "commercialStatus": "SMEG presente en destacados de Hauskeepers; modelos a confirmar"
     }
   ],
   "materials": [
@@ -195,8 +183,7 @@
       "solutions": [
         "aventos",
         "space-tower",
-        "rauvisio",
-        "smeg"
+        "rauvisio"
       ]
     },
     {
@@ -245,7 +232,7 @@
       ]
     }
   ],
-  "structure": "reference-film-2026-10-21",
+  "structure": "continuous-hardware-servo-aventos-space-tower-v2",
   "philosophy": {
     "label": "Nuestra forma de ver el espacio",
     "text": "Creemos en espacios que te facilitan la vida. En materiales que se sienten. Y en pequeños movimientos que cambian todo."
@@ -296,13 +283,6 @@
       "title": "El carácter se siente.",
       "image": "/assets/material.webp",
       "alt": "Cocina con superficies REHAU"
-    },
-    {
-      "id": "smeg",
-      "label": "Equipamiento",
-      "title": "Todo habla el mismo idioma.",
-      "image": "/assets/smeg.webp",
-      "alt": "Horno SMEG Línea"
     }
   ]
 }

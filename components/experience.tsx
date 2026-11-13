@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { content as initial, type Content, type Solution } from '../lib/content';
 import { track, whatsappUrl } from '../lib/analytics';
+import { BLUM_CONFIGURATOR } from '../lib/brand-resources';
 
 const DataContext = createContext(initial);
 const DetailContext = createContext<(id: string, origin?: string) => void>(() => {});
@@ -15,7 +16,19 @@ export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d={diagonal ? 'M5 19 19 5M5 5h14v14' : 'M4 12h16m-6-6 6 6-6 6'} stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 export function Logo({ className = '' }: { className?: string }) {
-  return <span className={`logo ${className}`} role="img" aria-label="hauskeepers" />;
+  return <span className={`logo ${className}`} role="img" aria-label="Hauskeepers">
+    <span className="logo-mark" aria-hidden="true"><svg viewBox="0 0 846 150" fill="currentColor">
+      <path className="logo-stroke logo-stroke-one" d="M5 6H34V65.5L62 35V6H91V45L34 106V120H5Z" />
+      <path className="logo-stroke logo-stroke-two" d="M48 106L113.5 35H156.5L77.5 120H48Z" />
+      <path className="logo-stroke logo-stroke-three" d="M123 86L154 120H112.3L103 109.5Z" />
+    </svg></span>
+    <span className="logo-wordmark" aria-hidden="true" />
+  </span>;
+}
+export function BrandMark({ brand }: { brand: string }) {
+  return brand === 'Blum'
+    ? <img className="hk-brand-mark" src="/assets/blum-logo.svg" width={100} height={50} alt="Blum" />
+    : <span>{brand}</span>;
 }
 export function WhatsApp({ children = 'Habla con un especialista', section = 'general', solution, brand, className = 'button', extra }: { children?: ReactNode; section?: string; solution?: string; brand?: string; className?: string; extra?: string }) {
   const { contact } = useContent();
@@ -58,15 +71,28 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     const solution = data.solutions.find(s => s.id === id);
     track({ event: 'solution_open', solution: id, brand: solution?.brand, section: origin });
   };
-  const close = () => { setSelected(null); previousFocus.current?.focus(); };
+  const close = () => {
+    if (dialog.current?.open) dialog.current.close();
+    setSelected(null);
+    previousFocus.current?.focus();
+  };
 
   return <DataContext.Provider value={data}><DetailContext.Provider value={open}>
     {children}
-    <dialog className="solution-dialog" ref={dialog} aria-labelledby="solution-title" onCancel={close} onClose={close} onClick={e => { if (e.target === e.currentTarget) close(); }}>
+    <dialog className="solution-dialog hk-dialog" ref={dialog} aria-labelledby="solution-title" onCancel={event => { event.preventDefault(); close(); }} onClose={close} onClick={e => { if (e.target === e.currentTarget) close(); }}>
       {active && <div className="dialog-layout">
         <button className="icon-button dialog-close" aria-label="Cerrar solución" onClick={close}>×</button>
-        <div className="dialog-media">{'video' in active && active.video ? <video key={active.id} controls playsInline muted preload="metadata" poster={active.image}><source src={active.video} type="video/mp4" /></video> : <img src={active.image} alt={active.alt} width="1280" height="900" />}</div>
-        <div className="dialog-copy"><p className="eyebrow">{active.brand} / {active.category}</p><h2 id="solution-title">{active.name}</h2><p className="dialog-intro">{active.title}</p><p>{active.description}</p><ul>{active.benefits.map(b => <li key={b}>{b}</li>)}</ul><WhatsApp section={selected?.origin} solution={active.name} brand={active.brand}>Consultar para mi proyecto</WhatsApp><p className="small-note">La configuración y disponibilidad se revisan con un asesor.</p><a className="source-link" href={active.source} target="_blank" rel="noopener noreferrer">Información del fabricante <Arrow diagonal /></a></div>
+        <div className="dialog-media"><Media src={active.image} alt={active.alt} eager /></div>
+        <div className="dialog-copy">
+          <div className="hk-dialog-brand"><BrandMark brand={active.brand} /></div>
+          <h2 id="solution-title">{active.name}</h2>
+          <p className="hk-dialog-description">{active.description}</p>
+          <WhatsApp section={selected?.origin} solution={active.name} brand={active.brand}>Cotiza por WhatsApp</WhatsApp>
+          <div className="hk-dialog-links">
+            {active.brand === 'Blum' && <a href={BLUM_CONFIGURATOR} target="_blank" rel="noopener noreferrer">Configura con Blum <Arrow diagonal /></a>}
+            <a href={active.source} target="_blank" rel="noopener noreferrer">Información del fabricante <Arrow diagonal /></a>
+          </div>
+        </div>
       </div>}
     </dialog>
   </DetailContext.Provider></DataContext.Provider>;
@@ -75,81 +101,109 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
 export function Header() {
   const [menu, setMenu] = useState(false);
   const path = usePathname();
+  const home = path === '/';
+  const headerRef = useRef<HTMLElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
   const logoAnchor = useRef<HTMLAnchorElement>(null);
+
   useEffect(() => { setMenu(false); }, [path]);
+
   useEffect(() => {
-    if (path !== '/') return;
+    const header = headerRef.current;
+    const anchor = logoAnchor.current;
+    if (!header || !anchor) return;
+    if (!home) {
+      header.classList.add('is-docked');
+      return;
+    }
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     let frame = 0;
     const clamp = (value: number) => Math.max(0, Math.min(1, value));
-    const mix = (from: number, to: number, amount: number) => from + (to - from) * amount;
-    const smooth = (value: number) => value * value * (3 - 2 * value);
     const update = () => {
       frame = 0;
-      const anchor = logoAnchor.current;
-      const hero = document.querySelector<HTMLElement>('.ref-opening');
-      if (!anchor || !hero) return;
+      const hero = document.querySelector<HTMLElement>('.cinema-hero');
       const target = anchor.getBoundingClientRect();
-      const rect = hero.getBoundingClientRect();
-      const mobile = innerWidth <= 800;
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const header = mobile ? 74 : 87;
-      const height = Math.max(570, innerHeight - header);
-      const width = document.documentElement.clientWidth;
-      const gutter = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gutter')) || width * .043;
-      let x = width / 2, y = header + 87 + (width - 2 * gutter) / 5.9 / 2, logoWidth = width - 2 * gutter, exit = 0;
-      if (mobile || reduced) {
-        const photo = hero.querySelector<HTMLElement>('.ref-opening-photo')?.getBoundingClientRect();
-        if (photo) {
-          x = photo.left + photo.width / 2;
-          y = photo.top + photo.height / 2;
-          logoWidth = photo.width * .86;
-          exit = reduced ? (y < header + 100 ? 1 : 0) : smooth(clamp((header + 100 - y) / 160));
-        }
-      } else {
-        const progress = clamp((header - rect.top) / Math.max(1, rect.height - height));
-        const intoImage = smooth(clamp(progress / .82));
-        logoWidth = mix(logoWidth, width * .55, intoImage);
-        y = mix(y, header + height / 2, intoImage);
-        exit = smooth(clamp((header + height - rect.bottom) / 190));
-      }
-      x = mix(x, target.left + target.width / 2, exit);
-      y = mix(y, target.top + target.height / 2, exit);
-      logoWidth = mix(logoWidth, target.width, exit);
-      anchor.style.setProperty('--home-logo-x', `${x}px`);
-      anchor.style.setProperty('--home-logo-y', `${y}px`);
-      anchor.style.setProperty('--home-logo-width', `${logoWidth}px`);
-      anchor.style.setProperty('--home-logo-shadow', mobile || exit < .99 ? '0 1px 20px #ffffff25' : 'none');
+      const progress = hero ? clamp(window.scrollY / Math.max(1, hero.offsetHeight - window.innerHeight)) : 1;
+      const eased = progress * progress * (3 - 2 * progress);
+      const amount = reduced.matches ? (progress >= 1 ? 1 : 0) : eased;
+      const start = 1 - amount;
+      anchor.style.setProperty('--hk-logo-x', `calc(50vw * ${start} + ${(target.left + target.width / 2) * amount}px)`);
+      anchor.style.setProperty('--hk-logo-y', `calc(50svh * ${start} + ${(target.top + target.height / 2) * amount}px)`);
+      anchor.style.setProperty('--hk-logo-width', `calc(min(74vw, 960px, 108svh) * ${start} + ${target.width * amount}px)`);
+      anchor.style.setProperty('--hk-logo-halo', `${Math.max(.4, start)}`);
+      header.classList.toggle('is-docked', progress >= .98);
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule, { passive: true });
-    return () => { window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); cancelAnimationFrame(frame); };
-  }, [path]);
+    reduced.addEventListener('change', schedule);
+    const resizeObserver = new ResizeObserver(schedule);
+    const hero = document.querySelector<HTMLElement>('.cinema-hero');
+    if (hero) resizeObserver.observe(hero);
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      reduced.removeEventListener('change', schedule);
+      resizeObserver.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [home, path, menu]);
+
   useEffect(() => {
     if (!menu) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setMenu(false); toggle.current?.focus(); }
-      if (e.key === 'Tab') {
-        const items = [toggle.current, ...Array.from(navRef.current?.querySelectorAll<HTMLElement>('a') || [])].filter(Boolean) as HTMLElement[];
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const background = Array.from(document.querySelectorAll<HTMLElement>('main, .hk-footer'));
+    const previousInert = background.map(node => node.inert);
+    background.forEach(node => { node.inert = true; });
+    navRef.current?.querySelector<HTMLElement>('a')?.focus();
+    const desktop = matchMedia('(min-width: 1051px)');
+    const onDesktop = () => { if (desktop.matches) setMenu(false); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenu(false);
+        toggle.current?.focus();
+      }
+      if (event.key === 'Tab') {
+        const items = [logoAnchor.current, toggle.current, ...Array.from(navRef.current?.querySelectorAll<HTMLElement>('a') || [])].filter(Boolean) as HTMLElement[];
         const first = items[0], last = items[items.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       }
     };
+    desktop.addEventListener('change', onDesktop);
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = overflow;
+      background.forEach((node, index) => { node.inert = previousInert[index]; });
+      desktop.removeEventListener('change', onDesktop);
+      document.removeEventListener('keydown', onKey);
+    };
   }, [menu]);
-  const items = [['soluciones', 'Soluciones'], ['inspiracion', 'Inspiración'], ['marcas', 'Marcas'], ['profesionales', 'Profesionales'], ['showroom', 'Showroom']];
-  return <header className={`site-header ${menu ? 'menu-open' : ''}`}><Link ref={logoAnchor} href="/" aria-label="Hauskeepers · Inicio" className={`header-logo ${path === '/' ? 'home-logo' : ''}`}><Logo /></Link><button ref={toggle} aria-label={menu ? 'Cerrar menú' : 'Abrir menú'} aria-controls="main-nav" aria-expanded={menu} className="menu-toggle" onClick={() => setMenu(!menu)}><span /><span /></button><nav ref={navRef} id="main-nav" aria-label="Navegación principal">{items.map(([slug, title]) => <Link href={`/${slug}`} aria-current={path === `/${slug}` ? 'page' : undefined} key={slug} onClick={() => setMenu(false)}>{title}</Link>)}<WhatsApp className="header-contact" section="menu">Hablemos</WhatsApp></nav></header>;
+
+  const items = [['/#productos', 'Productos'], ['/#marcas', 'Marcas'], ['/#configurador', 'Configurador'], ['/showroom', 'Visítanos']];
+  return <header ref={headerRef} className={`hk-header ${home ? 'home' : 'is-docked'} ${path === '/marcas' ? 'brand-route' : ''} ${menu ? 'menu-open' : ''}`}>
+    <Link ref={logoAnchor} href="/" aria-label="Hauskeepers · Inicio" className="hk-logo-anchor" onClick={event => {
+      setMenu(false);
+      if (home && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    }}><Logo /></Link>
+    <button ref={toggle} type="button" aria-label={menu ? 'Cerrar menú' : 'Abrir menú'} aria-controls="main-nav" aria-expanded={menu} className="hk-menu-toggle" onClick={() => setMenu(value => !value)}><span /><span /></button>
+    <nav ref={navRef} id="main-nav" aria-label="Navegación principal" onClick={event => { if ((event.target as HTMLElement).closest('a')) setMenu(false); }}>
+      {items.map(([id, title]) => home && id.startsWith('/#') ? <a href={id.slice(1)} key={id}>{title}</a>
+        : <Link href={id} key={id}>{title}</Link>)}
+      <WhatsApp className="hk-header-contact" section="menu">Hablemos</WhatsApp>
+    </nav>
+  </header>;
 }
 
 export function Footer() {
   const data = useContent();
-  const path = usePathname();
-  return <>{path !== '/' && <section className="closing" id="hablemos"><div className="closing-top"><span className="eyebrow">TU SIGUIENTE PROYECTO</span><span className="small-dot" /></div><h2>Cuéntanos qué<br />quieres construir<span className="orange">.</span></h2><div className="closing-bottom"><p>Una idea es suficiente para empezar.</p><WhatsApp section="cierre" className="button button-dark">Habla con un especialista</WhatsApp></div></section>}<footer className="site-footer"><div className="footer-main"><Link href="/" aria-label="Hauskeepers · Inicio">{path === '/' ? <span className="footer-signature">EL DISEÑO SE DESCUBRE.</span> : <Logo />}</Link><p>Posibilidades para el espacio.<br />{data.brand.city}</p><div><a href={data.brand.instagram} target="_blank" rel="noopener noreferrer">Instagram <Arrow diagonal /></a><a href={`tel:+${data.contact.phone}`}>{data.contact.displayPhone}</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Hauskeepers</span><span>Diseño que se vive.</span><Link href="/privacidad">Privacidad</Link></div></footer></>;
+  return <footer className="hk-footer">
+    <span>© {new Date().getFullYear()} Hauskeepers</span>
+    <div><a href={data.brand.instagram} target="_blank" rel="noopener noreferrer">Instagram <Arrow diagonal /></a><Link href="/privacidad">Privacidad</Link></div>
+  </footer>;
 }
 
 export function MotionObserver() {
@@ -186,9 +240,18 @@ export function SolutionButton({ id, children = 'Conocer la solución', origin =
   return <button className={className} onClick={() => open(id, origin)}>{children}<Arrow /></button>;
 }
 
+const imageDimensions: Record<string, readonly [number, number]> = {
+  aventos: [1800, 1200], bar: [1167, 656], bianco: [1800, 1285], drawer: [1800, 1013],
+  grafite: [1800, 1285], hero: [1920, 1080], kitchen: [1167, 656], lift: [1800, 1350],
+  living: [1167, 656], material: [1800, 1285], moro: [1800, 1285], office: [1167, 656],
+  revego: [1167, 656], 'revego-premium': [1920, 1080], 'merivobox-premium': [1170, 658], storage: [1800, 1350], wardrobe: [1167, 656], warm: [1800, 1285],
+};
+
 export function Media({ src, alt, className = '', eager = false }: { src: string; alt: string; className?: string; eager?: boolean }) {
-  const small = src.endsWith('.webp') ? src.replace('.webp', '-sm.webp') : undefined;
-  return <img className={className} src={src} srcSet={small ? `${small} 800w, ${src} 1800w` : undefined} sizes="(max-width: 700px) 100vw, 85vw" alt={alt} width="1800" height="1200" loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : 'auto'} decoding="async" />;
+  const name = /^\/assets\/([^/]+)\.webp$/.exec(src)?.[1];
+  const dimensions = name ? imageDimensions[name] : undefined;
+  const small = dimensions ? src.replace('.webp', '-sm.webp') : undefined;
+  return <img className={className} src={src} srcSet={small && dimensions ? `${small} 800w, ${src} ${dimensions[0]}w` : undefined} sizes="100vw" alt={alt} width={dimensions?.[0]} height={dimensions?.[1]} loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : 'auto'} decoding="async" />;
 }
 
 export function Movement() {
@@ -261,7 +324,7 @@ export function Inspiration({ full = false }: { full?: boolean }) {
 
 export function Brands({ full = false }: { full?: boolean }) {
   const open = useDetails();
-  return <section className={`brands section-pad ${full ? 'brands-full' : ''}`} id="marcas"><div className="section-heading"><span className="eyebrow">BUENAS IDEAS. GRANDES ALIADOS.</span>{!full && <Link href="/marcas" className="text-link">Nuestro universo <Arrow /></Link>}</div><div className="brand-primary"><button onClick={() => open('merivobox', 'marcas')}><span className="blum-word">blum</span><span>Movimiento que cambia el mobiliario.</span><Arrow diagonal /></button><button onClick={() => open('rauvisio', 'marcas')}><span className="rehau-word">REHAU</span><span>Superficies con carácter propio.</span><Arrow diagonal /></button></div><div className="brand-secondary"><WhatsApp section="marcas" solution="Stone Fusion" brand="Stone Fusion" className="brand-link"><span className="stone-word">STONE FUSION</span><span>Materialidad</span></WhatsApp><WhatsApp section="marcas" solution="Häfele" brand="Häfele" className="brand-link"><span className="hafele-word">Häfele</span><span>Soluciones y detalles</span></WhatsApp><button onClick={() => open('smeg', 'marcas')} className="brand-link"><span className="smeg-word">smeg</span><span>Equipamiento</span><Arrow diagonal /></button></div>{full && <div className="brand-context"><h2>Hauskeepers.<br />El punto de encuentro.</h2><p>Explora materiales, movimiento y equipamiento en un mismo lugar. Consulta con el equipo qué marcas, modelos y configuraciones encajan con tu proyecto.</p></div>}</section>;
+  return <section className={`brands section-pad ${full ? 'brands-full' : ''}`} id="marcas"><div className="section-heading"><span className="eyebrow">BUENAS IDEAS. GRANDES ALIADOS.</span>{!full && <Link href="/marcas" className="text-link">Nuestro universo <Arrow /></Link>}</div><div className="brand-primary"><button onClick={() => open('merivobox', 'marcas')}><span className="blum-word">blum</span><span>Movimiento que cambia el mobiliario.</span><Arrow diagonal /></button><button onClick={() => open('rauvisio', 'marcas')}><span className="rehau-word">REHAU</span><span>Superficies con carácter propio.</span><Arrow diagonal /></button></div><div className="brand-secondary"><WhatsApp section="marcas" solution="Stone Fusion" brand="Stone Fusion" className="brand-link"><span className="stone-word">STONE FUSION</span><span>Materialidad</span></WhatsApp><WhatsApp section="marcas" solution="Häfele" brand="Häfele" className="brand-link"><span className="hafele-word">Häfele</span><span>Soluciones y detalles</span></WhatsApp></div>{full && <div className="brand-context"><h2>Hauskeepers.<br />El punto de encuentro.</h2><p>Explora materiales, movimiento y equipamiento en un mismo lugar. Consulta con el equipo qué marcas, modelos y configuraciones encajan con tu proyecto.</p></div>}</section>;
 }
 
 export function Professionals({ full = false }: { full?: boolean }) {

@@ -7,8 +7,12 @@ export function track(event: ShowroomEvent) {
   window.dataLayer.push(payload);
   window.dispatchEvent(new CustomEvent('hauskeepers:analytics', { detail: payload }));
 }
-export function whatsappUrl(phone: string, section: string, solution?: string, brand?: string, extra?: string) {
-  const context = solution ? `la solución ${solution}${brand && brand !== solution ? ` de ${brand}` : ''}` : `la sección ${section}`;
-  const message = `Hola, estoy viendo ${context} en el showroom digital de Hauskeepers y quisiera asesoría para mi proyecto.${extra ? ` ${extra}` : ''}\n\nOrigen: showroom digital · ${section}`;
+export function whatsappUrl(phone: string, _section: string, solution?: string, brand?: string, extra?: string) {
+  const context = solution
+    ? `Hola, me interesa ${solution}${brand && brand !== solution ? ` de ${brand}` : ''}. Quisiera una cotización para mi proyecto.`
+    : brand
+      ? `Hola, quisiera conocer las opciones de ${brand} para mi proyecto.`
+      : 'Hola, quisiera asesoría para mi proyecto.';
+  const message = extra ? `${context} ${extra}` : context;
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }

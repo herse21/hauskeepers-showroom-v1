@@ -3,7 +3,6 @@
   "storage": "https://www.blum.com/corporate/media/bilder/produkte/boxsysteme/LBX0311_AA_FRD_FO_BAU_-SALL_-APR6I_-V1_4:3.jpg",
   "aventos": "https://www.blum.com/corporate/media/bilder/produkte/klappensysteme/aventos-top/me96878552_aa_fot_fo_bau_-sall_-amc_-v1_3:2.jpg",
   "drawer": "https://www.blum.com/corporate/media/bilder/produkte/boxsysteme/merivobox/me210520_aa_fot_fo_bau_-sall_-amc_-v1_16:9.jpg",
-  "smeg": "https://www.smeg.com/binaries/content/gallery/smeg-mexico/smeg_hero-banner_linea_1920x960jpg.jpg/smeg_hero-banner_linea_1920x960jpg.jpg/brx%3AdoubleDeskLarge",
   "material": "https://www.rehau.com/resource/image/2350668/7x5/1920/1371/da42586aa5f88477d1f4795fd628aa37/CB3A687EC5CFCB73578A04B96CA62B38/luxeme-colorlook-crop1-1103191.jpg",
   "bianco": "https://www.rehau.com/resource/image/2350654/7x5/1920/1371/d06bbae039a2e453898484c9a6a34a20/A11CE9D484DC47B6E9EDEBC8F74DB166/img-4562-92943.jpg",
   "grafite": "https://www.rehau.com/resource/image/2350664/7x5/1920/1371/ced74dce4a396629143170b60ca9f088/C4469417A9260D2EC3DFF5E90FA99E4D/o03-d084-81647.jpg",
@@ -13,5 +12,211 @@
   "moro": "https://www.rehau.com/resource/image/2350652/7x5/1920/1371/abacf18ba249e3501dfa7d77a4d4f85d/4B151435F3888B498941E6E69491B8B4/img-4337m-65417.jpg",
   "lift": "https://www.blum.com/corporate/media/bilder/produkte/klappensysteme/aventos-top/me59769959_aa_fot_fo_bau_-sall_-amc_-v1_4:3.jpg",
   "revegoVideoFinal": "https://www.blum.com/file/me30773208_pr_an_fi_bau?country=mx&language=es",
-  "hauskeepersLogo": "https://www.instagram.com/hauskeepers_hk/"
+  "hauskeepersLogo": "https://www.instagram.com/hauskeepers_hk/",
+  "revegoPremium": "https://www.blum.com/corporate/media/bilder/produkte/pocketsysteme/me11710946_16:9.jpg",
+  "merivoboxPremium": "https://www.blum.com/corporate/media/bilder/landingpage/kampagnen/merivobox/mvx0019_m_16:9.jpg",
+  "blumConfiguratorWorkspace": {
+    "source": "https://www.blum.com/mx/es/services/planning-construction-product-selection/product-configurator/",
+    "assetUrl": "https://www.blum.com/corporate/media/bilder/services/produktkonfigurator/4-3D-CAD_Zusammenstellung_EN_4:3.png",
+    "localAsset": "/assets/blum-configurator-workspace-hd.webp",
+    "resolution": "1448x1086",
+    "processing": "AI-assisted restoration of the official reference for visual presentation"
+  },
+  "hafeleLooxWorkspace": {
+    "source": "https://hafeleconcept.com/urunleri-kesfet/mutfak-cozumleri/aydinlatma-sistemleri",
+    "assetUrl": "https://hafeleconcept.com/uploads/byk-24823190600_1170-39-16.jpg",
+    "localAsset": "/assets/hafele-loox-workspace.jpg"
+  },
+  "stoneSurfaceReference": {
+    "source": "https://unsplash.com/photos/a-kitchen-with-a-marble-counter-top-next-to-a-bar-fO94dDrbEgk",
+    "photographer": "Alexey Aladashvili",
+    "localAsset": "/assets/stone-surface-reference.jpg",
+    "kind": "Fotografía de inspiración bajo la licencia de Unsplash, sin atribución comercial a Stone Fusion."
+  },
+  "blumLogo": {
+    "source": "https://www.blum.com/mx/es/",
+    "assetUrl": "https://www.blum.com/corporate/layout/facelift/images/ci/logo.svg.svg",
+    "localAsset": "/assets/blum-logo.svg",
+    "kind": "Official unmodified SVG downloaded from manufacturer website",
+    "verifiedAt": "2026-11-10"
+  },
+  "hauskeepersBrandAnimation": {
+    "source": "User-supplied WhatsApp GIF 2026-10-30 at 16.49.39.gif",
+    "originalPreserved": "work/branding/hauskeepers-original.gif",
+    "reference": "Animation transitions from legacy identity into current symbol and wordmark",
+    "sampledOrange": "#dc7536",
+    "implementation": "Existing current vector geometry retained; symbol assembly, wordmark reveal and scroll to header; no raster enlargement."
+  },
+  "kitchenAventosAI": {
+    "generator": "Higgsfield / Seedance 2.5",
+    "resolution": "1280x720",
+    "mode": "Unlimited",
+    "seed": "800211774",
+    "sourceOutputId": "e4cbc0f5-1553-41b9-ac33-47fc2e9f853a",
+    "references": [
+      "warm",
+      "lift"
+    ],
+    "localAsset": "/assets/kitchen-aventos-v2-720p.mp4",
+    "kind": "AI-generated conceptual scene, not a manufacturer product demonstration",
+    "edit": "Preserved original opening and mirrored closing frames. Right-hand oven bank replaced by the new handleless graphite kitchen reference with tracked room transform held from frame 174. First 12 frames blend from the shared new wide plate. Silent, 24 fps, 1280x720; original untouched.",
+    "wideFrameAlignment": {
+      "scaleX": 1.02,
+      "translateX": 30.4,
+      "scaleY": 1.0079999999999991,
+      "translateY": -2.4,
+      "alignmentFadeFrames": 48,
+      "plateBlendFrames": 12
+    },
+    "current": false,
+    "integrated": false,
+    "status": "historical_editing_source_superseded_by_unified_v7",
+    "webExportRemoved": true,
+    "sourceOriginal": "work/seedance/originals/hauskeepers-aventos-seedance-720p.mp4"
+  },
+  "kitchenHardwareV2": {
+    "localAsset": "/assets/kitchen-hardware-v2.webp",
+    "resolution": "1672x941",
+    "kind": "AI-generated edit of prior kitchen reference; removes oven and adds integrated fridge/pantry fronts",
+    "reference": "warm > original generated kitchen wide frame",
+    "verifiedAt": "2026-11-10",
+    "current": false,
+    "integrated": false,
+    "status": "historical_editing_source_superseded_by_unified_v7"
+  },
+  "servoDriveFlexReference": {
+    "reel": "https://www.instagram.com/reel/DdRutixRSgz/",
+    "officialSource": "https://www.blum.com/mx/es/products/motion-technologies/servo-drive/servo-drive-flex/programme/",
+    "status": "Completed output 14f03545-8f4f-4512-915f-9d5a240945b9 rejected by user; not downloaded or integrated",
+    "seed": "1591787626"
+  },
+  "spaceTowerNobleRustReference": {
+    "reel": "https://www.instagram.com/reel/Dd9dObfROZi/",
+    "officialSource": "https://www.blum.com/mx/es/products/cabinet-applications/space-tower/overview/",
+    "status": "Reference product; historic Gemini montage withdrawn from active page."
+  },
+  "servoDriveDrawerReference": {
+    "source": "User-supplied codex-clipboard-553913ba-4037-458b-9cf5-4c3db9605b85.png",
+    "localReference": "work/product-references/servo-drive-drawer-reference.png",
+    "officialSource": "https://www.blum.com/mx/es/products/motion-technologies/servo-drive/servo-drive-pullouts/programme/",
+    "verifiedAt": "2026-11-11T14:23:40.752898+00:00",
+    "ui": "Existing orange circle + / minus stays in website overlay, never generated into video",
+    "status": "Historical reference; active V7 source and integration listed in unifiedVideoRevision.",
+    "seed": "1672903845",
+    "currentCorrection": {
+      "status": "corrected_reference_and_prompt_ready_not_submitted_due_quota",
+      "reference": "work/product-references/servo-drive-side-closed-v3.png",
+      "prompt": "work/gemini/servo-drive-lateral-prompt-v3.txt",
+      "requestedSeconds": 8
+    }
+  },
+  "kitchenSpaceTowerAI": {
+    "generator": "Gemini",
+    "chat": "https://gemini.google.com/app/e493ccc11de1c4f5?hl=es-MX",
+    "kind": "AI-generated conceptual scene, not a manufacturer product demonstration",
+    "localAsset": "/assets/kitchen-space-tower-v3-720p.mp4",
+    "resolution": "1280x720",
+    "durationSeconds": 10,
+    "fps": 24,
+    "sourceOriginal": "work/gemini/space-tower-original-gemini-v1.mp4",
+    "originalSHA256": "f5f409fb2f3a8c135c90278672d1dcdb487c19e4d34d5371adb7c430231d5686",
+    "edit": "Full adjacent-panel search and lower-percentile wall detection remove the brief shelf strip during camera entry and exit. Floor colour excluded from graphite sampling. Original door/drawers preserved; first 120 frames mirrored for reversible silent 10s web playback.",
+    "verifiedAt": "2026-11-11T17:38:10.363829+00:00",
+    "verifiedLocally": true,
+    "published": false,
+    "correctedMaster": "work/gemini/space-tower-panel-corregido-v3.mp4",
+    "sha256": "7074ac64eb56caa456d36eaaea7709dc1015eb7a9aef24683527d94fa5995747",
+    "current": false,
+    "integrated": false,
+    "status": "historical_editing_source_superseded_by_unified_v7",
+    "webExportRemoved": true
+  },
+  "servoDriveCinematicAI": {
+    "service": "Higgsfield",
+    "model": "Seedance 2.5",
+    "generationMode": "Unlimited",
+    "outputId": "3fa95056-44c2-4b07-82c0-728b17f3b40f",
+    "kind": "AI-generated illustrative cabinet animation, not a certified manufacturer demonstration",
+    "resolution": "1280x720",
+    "original": "work/seedance/originals/hauskeepers-servo-drive-cinematico-v4-720p.mp4",
+    "originalSHA256": "dec5c84dd63b3fdee9d1d5e57ce4ae6810af4b35900057832dff098833279dd4",
+    "cameraEditedPreview": "work/seedance/interactive/hauskeepers-servo-drive-cinematico-v4-720p.mp4",
+    "cameraEditedSHA256": "77d9e10f83ec570ba9c0286bc090ec3c3bf204d0f121d447e2b37b85aaaf9eb3",
+    "durationSeconds": 10,
+    "edit": "Camera framing strengthened; final extra source frame removed to keep exactly 240 frames at 24 fps. Original motion and same-time audio preserved.",
+    "reference": "work/product-references/servo-drive-side-closed-v3.png",
+    "verifiedAt": "2026-11-11T20:25:28.000239+00:00",
+    "fullDecodePassed": true,
+    "nativeBrowserPlaybackReachedEnd": true,
+    "integrated": false,
+    "published": false,
+    "current": false,
+    "status": "historical_editing_source_superseded_by_unified_v7"
+  },
+  "kitchenHardwareV4": {
+    "localAsset": "/assets/kitchen-hardware-v4.webp",
+    "kind": "One coherent AI-generated conceptual kitchen image; not a real showroom photograph",
+    "sourceMaster": "work/seedance/unified-v7/kitchen-master.png",
+    "sha256": "536d74a7c66cafe505e0c88f0efac03b00d4f83d60a5ec3911e5069e5a32983d",
+    "current": true,
+    "published": false
+  },
+  "unifiedVideoRevision": {
+    "strategy": "SERVO-DRIVE and AVENTOS use whole-frame crops of the master kitchen. SPACE TOWER uses an earlier five-drawer take joined to the shared wide frame with a full-frame transition.",
+    "record": "work/seedance/unified-v7/production.json",
+    "status": "all_three_integrated_local_review_passed",
+    "resolution": "720p",
+    "requestedSeconds": 10,
+    "paidActions": false,
+    "integrated": true,
+    "published": false,
+    "integratedProducts": [
+      "servo-drive",
+      "aventos",
+      "space-tower"
+    ],
+    "servoDrive": {
+      "asset": "/assets/kitchen-servo-drive-v7-720p.mp4",
+      "outputId": "b2b4d993-9001-409e-86fd-bbeca4109a82",
+      "sourceOriginal": "work/seedance/unified-v7/originals/servo-drive-b2b4d993-9001-409e-86fd-bbeca4109a82.mp4",
+      "edit": "Whole-frame source from exact room crop. Opening source frames 48..156 sampled into 96 frames, preceded by a 24-frame camera approach from the common master; mirrored for exact reversal. No product cutout masks.",
+      "qa": "work/seedance/unified-v7/servo-web-qa.json",
+      "verifiedLocally": true,
+      "published": false
+    },
+    "spaceTower": {
+      "asset": "/assets/kitchen-space-tower-v8-720p.mp4",
+      "reference": "https://www.instagram.com/reel/Dd9dObfROZi/",
+      "officialSource": "https://www.blum.com/mx/es/products/cabinet-applications/space-tower/overview/",
+      "sourceOriginal": "work/gemini/space-tower-original-gemini-v1.mp4",
+      "sourceEdit": "work/gemini/space-tower-panel-corregido-v3.mp4",
+      "localRecord": "work/space-tower-fix/media.json",
+      "edit": "Five interior drawers. Shared kitchen approach and full-frame dissolve into the earlier take. Independent door and drawer controls, with mirrored closing.",
+      "published": false
+    },
+    "verifiedLocally": true,
+    "wideFrameContinuity": "work/seedance/unified-v7/wide-frame-continuity.json",
+    "aventos": {
+      "asset": "/assets/kitchen-aventos-v7-720p.mp4",
+      "outputId": "646faa85-55a2-4da1-ad36-74a36d615ddb",
+      "sourceOriginal": "work/seedance/unified-v7/originals/aventos-646faa85-55a2-4da1-ad36-74a36d615ddb.mp4",
+      "sourceSeconds": 6,
+      "edit": "Whole-frame source from the exact kitchen crop. Original frames 48..120; 24-frame approach, 96-frame action, exact mirrored reverse. Control follows measured front centre; arrow follows the interior exposed. No product cutout masks.",
+      "qa": "work/seedance/unified-v7/aventos-web-qa.json",
+      "verifiedLocally": true,
+      "published": false
+    },
+    "spaceTowerRejected": {
+      "asset": "/assets/kitchen-space-tower-v7-720p.mp4",
+      "outputId": "35367129-5eff-435c-8a2c-541205b297a9",
+      "sourceOriginal": "work/seedance/unified-v7/originals/space-tower-35367129-5eff-435c-8a2c-541205b297a9.mp4",
+      "edit": "Whole-frame crop of the one kitchen. Source 0..192 sampled for forward action, followed by the same frames reversed. Door pauses at web frame 77 before the drawer moves. No product cutout masks.",
+      "qa": "work/seedance/unified-v7/space-web-qa.json",
+      "verifiedLocally": true,
+      "published": false,
+      "current": false,
+      "webExportRemoved": true,
+      "status": "rejected_fixed_upper_shelves_do_not_match_product"
+    }
+  }
 }

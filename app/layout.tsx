@@ -2,6 +2,11 @@ import type { Metadata, Viewport } from 'next';
 import { ExperienceProvider, Footer, Header, MotionObserver } from '../components/experience';
 import { content, siteUrl } from '../lib/content';
 import './styles.css';
+import './premium.css';
+import './shell.css';
+import './interactive-showroom.css';
+import './responsive.css';
+import './brand-journey.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
