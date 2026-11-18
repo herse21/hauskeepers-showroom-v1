@@ -183,8 +183,8 @@ export function KitchenShowroom3D() {
   return <section className="kitchen-experience kitchen-three" aria-label="Recorrido interactivo por una cocina">
     <div className={`kitchen-stage chapter-${chapter}`} ref={stage} data-three-ready={ready} data-three-chapter={chapter}>
       {!ready && <picture className="kitchen-three-preview" aria-hidden="true">
-        <source media="(max-aspect-ratio: 3/4)" srcSet="/assets/kitchen-preview-tall.webp" />
-        <img src="/assets/kitchen-preview-wide.webp" alt="" width={1600} height={1000} fetchPriority="high" />
+        <source media="(max-aspect-ratio: 19/20)" srcSet="/assets/kitchen-preview-tall.webp" />
+        <img src="/assets/kitchen-preview-wide.webp" alt="" width={1920} height={880} fetchPriority="high" />
       </picture>}
       <canvas className="kitchen-three-canvas" ref={canvas} aria-hidden="true" />
       {unavailable && <p className="kitchen-three-status" role="status">La vista interactiva no está disponible en este navegador.</p>}

@@ -12,7 +12,6 @@ export type KitchenPose = { chapter: number; travel: number; firstApproach: numb
 
 const finishAssets = {
   limestone: 'kitchen-limestone.webp',
-  plaster: 'kitchen-white_plaster_02-color.webp',
   plasterNormal: 'kitchen-white_plaster_02-normal.webp',
   floor: 'kitchen-wooden_floor_02-color.webp',
   floorNormal: 'kitchen-wooden_floor_02-normal.webp',
@@ -50,7 +49,8 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
   let environment: T.WebGLRenderTarget | undefined;
   const key = new T.DirectionalLight(0xffebd2, 2.1);
   key.position.set(-2, 5, 4);
-  scene.add(key, new T.HemisphereLight(0xf3f5fa, 0x716657, 1.6));
+  const fill = new T.HemisphereLight(0xf3f5fa, 0x716657, 1.6);
+  scene.add(key, fill);
 
   const camera = new T.PerspectiveCamera(36, 1, 0.05, 30);
   const assembly = new T.Group();
@@ -99,8 +99,8 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
   }
 
   const limestone = kitchen ? surface(0xe0dbd3, 0.73) : oak;
-  const lacquer = kitchen ? surface(0xe4dcd0, 0.28) : cream;
-  const countertop = kitchen ? surface(0xd8d4ca, 0.29) : cream;
+  const lacquer = kitchen ? surface(0xe4dcd0, 0.43) : cream;
+  const countertop = kitchen ? surface(0xd8d4ca, 0.38) : cream;
 
   function box(parent: T.Object3D, material: T.Material, size: number[], position: number[], radius = 0.002) {
     const [width, height, depth] = size;
@@ -152,6 +152,7 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
 
   function servo() {
     const [, rightPanel] = cabinet(0.84, 0.72, 0.58, graphite);
+    if (kitchen) box(root, graphite, [.75, .054, .51], [0, -.027, -.313]);
     box(root, countertop, [0.88, 0.032, 0.62], [0, 0.736, -0.285], 0.004);
     box(root, limestone, [0.832, 0.348, 0.021], [0, 0.18, 0.012]);
     const drawer = new T.Group();
@@ -203,14 +204,22 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
 
   function tower() {
     cabinet(.6, 1.99, .56, graphite);
-    const { door, drawers, setPose } = bindSpaceTower(hardware('tower'));
+    const model = hardware('tower');
+    const { door, drawers, setPose } = bindSpaceTower(model);
+    const interior = kitchen ? drawers.flatMap((drawer, i) => [
+      drawer, cadPart(model, `FixedRail${i}`), cadPart(model, `Slide${i}`),
+    ]) : [];
     const grip = box(root, cap, [.009, .22, .016], [.248, 1.12, .026], .003);
     door.add(grip);
     controlPoint(door, 2, .212, 1.07, .04);
     drawers.forEach((drawer, i) => {
       controlPoint(drawer, 2, 0, [.119, .498, .818, 1.17, 1.448][i], .023);
     });
-    return (pose: DemoPose) => setPose(pose.door, pose.drawers);
+    return (pose: DemoPose) => {
+      // The opaque door conceals the drawers and their rails at the closed stop.
+      interior.forEach(part => { part.visible = pose.door > 0; });
+      setPose(pose.door, pose.drawers);
+    };
   }
 
   function resize(width: number, height: number) {
@@ -234,11 +243,15 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
 
   function showKitchen(finishes: KitchenFinishes) {
     scene.background = new T.Color(0xd6c9b5);
-    renderer.toneMappingExposure = 1.12;
+    renderer.toneMappingExposure = 1.04;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = T.PCFShadowMap;
-    key.intensity = 2.65;
-    key.position.set(-4.8, 4, 1.1);
+    key.color.set(0xe6efff);
+    key.intensity = 1.25;
+    key.position.set(-4.8, 3.5, .3);
+    fill.color.set(0xf5f5f3);
+    fill.groundColor.set(0x8e8170);
+    fill.intensity = 1.67;
     key.castShadow = true;
     const shadowSize = touch ? 1024 : 2048;
     key.shadow.mapSize.set(shadowSize, shadowSize);
@@ -246,24 +259,28 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
     key.shadow.needsUpdate = true;
     Object.assign(key.shadow.camera, { left: -4.5, right: 4.5, top: 4, bottom: -4, near: .5, far: 13 });
     key.shadow.camera.updateProjectionMatrix();
-    key.shadow.normalBias = 0.006;
-    key.shadow.bias = -0.0004;
-    const wall = surface(0xcbbca8, .86);
-    const backsplash = surface(0xa99c8c, .73);
-    const plaster = surface(0xe1d9cd, 0.95);
-    const ceiling = surface(0xf5f0e8, .93);
-    ceiling.emissive.set(0xeee8df);
-    ceiling.emissiveIntensity = .21;
-    const floor = surface(0xe4ceb3, .57);
+    key.shadow.normalBias = .012;
+    key.shadow.bias = -.00065;
+    key.shadow.radius = touch ? 1.5 : 2.5;
+    const wall = surface(0xcfc9bc, .91);
+    const backsplash = surface(0xc4b9a8, .67);
+    const plaster = surface(0xdedbd2, .94);
+    const ceiling = surface(0xe9e7e0, .96);
+    ceiling.emissive.set(0xd6d4ce);
+    ceiling.emissiveIntensity = .11;
+    const floor = surface(0xc3c4bd, .71);
     const dark = surface(0x232522, 0.49);
-    const bouncedDaylight = new T.PointLight(0xf9f0dd, 11, 6, 2);
-    bouncedDaylight.position.set(-1.68, 1.55, -.37);
+    graphite.color.set(0x393b3a);
+    graphite.roughness = .61;
+    cap.color.set(0x5f6464);
+    const bouncedDaylight = new T.PointLight(0xe6edfc, 8.2, 7, 2);
+    bouncedDaylight.position.set(-2.16, 1.78, -1.25);
     scene.add(bouncedDaylight);
     const plant = surface(0x485637, 0.82);
     const ceramic = surface(0x857a55, 0.48);
-    const warmLight = surface(0xffedbf, 0.45);
-    warmLight.emissive.set(0xffc37a);
-    warmLight.emissiveIntensity = 1.5;
+    const warmLight = surface(0xffefdb, 0.45);
+    warmLight.emissive.set(0xffd6ac);
+    warmLight.emissiveIntensity = 1;
 
     box(root, floor, [12, .08, 12], [0, -.04, 0], 0).castShadow = false;
     const contact = document.createElement('canvas');
@@ -271,9 +288,9 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
     const shade = contact.getContext('2d');
     if (shade) {
       const gradient = shade.createRadialGradient(64, 64, 9, 64, 64, 64);
-      gradient.addColorStop(0, '#2b2116b0');
-      gradient.addColorStop(0.42, '#2b21166e');
-      gradient.addColorStop(1, '#2b211600');
+      gradient.addColorStop(0, '#241f1bbb');
+      gradient.addColorStop(0.42, '#241f1b75');
+      gradient.addColorStop(1, '#241f1b00');
       shade.fillStyle = gradient;
       shade.fillRect(0, 0, 128, 128);
       const map = new T.CanvasTexture(contact);
@@ -293,36 +310,41 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
     box(root, backsplash, [3.39, .735, .018], [-.83, 1.222, -2.631]);
     box(root, ceiling, [7, .11, 7.5], [.48, 2.746, 1.04]).castShadow = false;
     box(root, plaster, [.12, 2.7, 7.5], [3.1, 1.35, 1.04]).castShadow = false;
-    box(root, plaster, [5.74, .045, .054], [.19, 2.672, -2.627], .003);
+    box(root, ceiling, [5.74, .019, .039], [.19, 2.682, -2.634], .001).castShadow = false;
+    box(root, plaster, [.025, .086, 4.2], [-2.609, .043, -.49], .002);
     box(root, plaster, [0.16, 2.7, .55], [-2.7, 1.35, -2.37]);
     box(root, plaster, [0.17, 2.7, 3.45], [-2.7, 1.35, 1.17]);
     box(root, plaster, [0.16, .23, 1.63], [-2.7, 2.58, -1.28]);
     box(root, plaster, [0.16, .75, 1.63], [-2.7, .375, -1.28]);
-    const windowTrim = surface(0x69635a, .47, .28);
-    for (const y of [.766, 2.45]) box(root, windowTrim, [.058, .043, 1.59], [-2.77, y, -1.28]);
-    for (const z of [-2.061, -1.28, -.498]) box(root, windowTrim, [.058, 1.67, .037], [-2.77, 1.61, z]);
+    const windowTrim = surface(0x555653, .48, .22);
+    for (const y of [.766, 2.45]) box(root, windowTrim, [.063, .04, 1.59], [-2.77, y, -1.28]);
+    for (const z of [-2.061, -1.28, -.498]) box(root, windowTrim, [.063, 1.67, .034], [-2.77, 1.61, z]);
+    for (const z of [-2.036, -1.302, -1.258, -.523]) {
+      box(root, dark, [.024, 1.64, .008], [-2.775, 1.61, z], .001);
+    }
     box(root, countertop, [.32, .047, 1.70], [-2.701, .744, -1.28], .005);
-    const pane = new T.MeshPhysicalMaterial({ color: 0xb6c5c1, metalness: .5, roughness: .14,
-      transparent: true, opacity: .105, depthWrite: false });
+    const pane = new T.MeshStandardMaterial({ color: 0xc2d0cd, metalness: .4, roughness: .18,
+      transparent: true, opacity: .12, depthWrite: false });
     materials.push(pane);
     box(root, pane, [.008, 1.65, 1.54], [-2.79, 1.61, -1.28], 0).castShadow = false;
     const exterior = new T.MeshBasicMaterial({ color: 0xffffff, side: T.BackSide });
+    exterior.color.setScalar(2.8);
     materials.push(exterior);
     const domeShape = new T.SphereGeometry(26, 32, 20);
     geometry.set('garden-dome', domeShape);
     const dome = new T.Mesh(domeShape, exterior);
-    dome.rotation.y = -.33;
+    dome.rotation.y = .82;
     scene.add(dome);
     const trim = surface(0xc8c3b8, .5);
-    const lampShape = new T.CylinderGeometry(.043, .043, .016, 18);
+    const lampShape = new T.CylinderGeometry(.043, .043, .009, 18);
     const lensShape = new T.CylinderGeometry(.032, .032, .003, 18);
     geometry.set('ceiling-trim', lampShape);
     geometry.set('ceiling-lens', lensShape);
     for (const [x, z] of [[-1.84, -1.65], [-.72, -1.65], [.42, -1.65], [1.54, -1.65], [-.82, .54], [.65, .54]]) {
       const fixture = new T.Mesh(lampShape, trim);
       const lens = new T.Mesh(lensShape, warmLight);
-      fixture.position.set(x, 2.689, z);
-      lens.position.set(x, 2.678, z);
+      fixture.position.set(x, 2.688, z);
+      lens.position.set(x, 2.683, z);
       root.add(fixture, lens);
     }
 
@@ -341,10 +363,11 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
       box(root, lacquer, [.652, .58, .36], [x, 1.84, -2.48], .003);
     }
     box(root, lacquer, [.898, .155, .355], [.015, 2.053, -2.48]);
-    box(root, warmLight, [3.03, .007, .016], [-1.034, 1.546, -2.35]);
+    box(root, dark, [2.85, .012, .025], [-.97, 1.548, -2.395]);
+    box(root, warmLight, [2.84, .003, .017], [-.97, 1.541, -2.395]);
     for (const x of [-2, -1.25, -.5, .24]) {
-      const led = new T.PointLight(0xffc389, 1.1, .95, 2);
-      led.position.set(x, 1.48, -2.37);
+      const led = new T.PointLight(0xffd2a4, .78, 1.21, 2);
+      led.position.set(x, 1.5, -2.32);
       scene.add(led);
     }
 
@@ -383,8 +406,10 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
     cylinder(ceramic, .032, .043, .15, .77, .93, -2.34);
     cylinder(carbon, .018, .018, .03, .77, 1.02, -2.34);
     cylinder(ceramic, .062, .04, .05, .72, .88, -2.27);
-    for (const x of [1.79, 2.41]) box(root, graphite, [.603, 2.63, .58], [x, 1.315, -2.29]);
-    box(root, graphite, [.597, .63, .58], [1.18, 2.31, -2.29]);
+    for (const x of [1.79, 2.41]) {
+      box(root, graphite, [.603, 2.63, .58], [x, 1.315, -2.29]).receiveShadow = false;
+    }
+    box(root, graphite, [.597, .63, .58], [1.18, 2.31, -2.29]).receiveShadow = false;
 
     // Batch opaque room meshes that share a material and shadow settings.
     // The door, drawers and hardware are added separately below.
@@ -436,31 +461,40 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
     }
     tile(finishes.limestone, true, 1, 1, T.MirroredRepeatWrapping);
     limestone.map = finishes.limestone;
-    tile(finishes.plaster, true, 4, 2);
     tile(finishes.plasterNormal, false, 4, 2);
-    for (const material of [wall, plaster, backsplash]) {
-      material.map = finishes.plaster;
+    backsplash.map = finishes.limestone;
+    for (const material of [wall, plaster, backsplash, limestone, ceiling, countertop]) {
       material.normalMap = finishes.plasterNormal;
-      material.normalScale.setScalar(.10);
+      material.normalScale.setScalar(.12);
     }
+    ceiling.normalScale.setScalar(.06);
     tile(finishes.floor, true, 5, 5);
     tile(finishes.floorNormal, false, 5, 5);
     floor.map = finishes.floor;
     floor.normalMap = finishes.floorNormal;
-    floor.normalScale.setScalar(.42);
+    floor.normalScale.setScalar(.28);
 
     exterior.map = finishes.garden;
     const generator = new T.PMREMGenerator(renderer);
     environment = generator.fromEquirectangular(finishes.garden);
     generator.dispose();
     scene.environment = environment.texture;
-    scene.environmentIntensity = .32;
+    scene.environmentIntensity = .4;
     const points = [
-      { eye: new T.Vector3(1.83, 1.48, 3.65), look: new T.Vector3(-.26, 1.20, -1.12) },
+      { eye: new T.Vector3(1.62, 1.43, 3.59), look: new T.Vector3(-.12, 1.22, -1.20) },
       { eye: new T.Vector3(.91, 1.04, 2.18), look: new T.Vector3(-.23, .49, .08) },
       { eye: new T.Vector3(-.63, 1.57, -.44), look: new T.Vector3(.015, 1.81, -2.11) },
       { eye: new T.Vector3(2.14, 1.32, .85), look: new T.Vector3(1.04, 1.01, -1.8) },
     ];
+    // Match the two startup images, including the crop applied by object-fit: cover.
+    const wide = { ...points[0], aspect: 1920 / 880, verticalTangent: Math.tan(T.MathUtils.degToRad(41 / 2)) };
+    const tallAspect = 780 / 1688;
+    const tall = {
+      eye: new T.Vector3(-.58, 1.39, 3.65), look: new T.Vector3(.44, 1.02, -1.55),
+      aspect: tallAspect, verticalTangent: Math.tan(T.MathUtils.degToRad(34 / 2)) / tallAspect,
+    };
+    const tallPreview = matchMedia('(max-aspect-ratio: 19/20)');
+    let opening = wide;
     const look = new T.Vector3();
     const eye = new T.Vector3();
     const pose: DemoPose = { door: 0, drawers: [], inspect: false };
@@ -468,6 +502,8 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
     const lastDoors = [-1, -1, -1];
     const lastDrawers = [0, 0, 0, 0, 0];
     let lastChapter = -1, lastAmount = -1, resized = true;
+    let chapterFov = 41;
+    let openingFov = 41;
 
     function renderKitchen({ chapter, travel, firstApproach, doors, drawers }: KitchenPose) {
       const previous = Math.max(0, chapter - 1);
@@ -475,8 +511,14 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
       const amount = chapter <= 1 ? firstApproach : travel;
       const cameraMoved = resized || lastChapter !== next || lastAmount !== amount;
       if (cameraMoved) {
-        eye.lerpVectors(points[previous].eye, points[next].eye, amount);
-        look.lerpVectors(points[previous].look, points[next].look, amount);
+        const from = previous === 0 ? opening : points[previous];
+        eye.lerpVectors(from.eye, points[next].eye, amount);
+        look.lerpVectors(from.look, points[next].look, amount);
+        const fov = previous === 0 ? T.MathUtils.lerp(openingFov, chapterFov, amount) : chapterFov;
+        if (camera.fov !== fov) {
+          camera.fov = fov;
+          camera.updateProjectionMatrix();
+        }
         camera.position.copy(eye);
         camera.lookAt(look);
         lastChapter = next;
@@ -506,7 +548,10 @@ function createBlumScene(canvas: HTMLCanvasElement, demo: BlumDemo | 'kitchen', 
       });
     }
     function resizeKitchen(width: number, height: number) {
-      camera.fov = 41 * Math.max(1, .88 / (width / Math.max(1, height))) ** .68;
+      const aspect = Math.max(1, width) / Math.max(1, height);
+      chapterFov = 41 * Math.max(1, .88 / aspect) ** .68;
+      opening = tallPreview.matches ? tall : wide;
+      openingFov = T.MathUtils.radToDeg(2 * Math.atan(opening.verticalTangent * Math.min(1, opening.aspect / aspect)));
       resize(width, height);
       resized = true;
     }

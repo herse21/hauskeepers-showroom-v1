@@ -28,6 +28,7 @@
   background: linear-gradient(0deg, #151511d9 0%, #1515113b 27%, transparent 54%),
     linear-gradient(180deg, #15151160, transparent 23%);
 }
+.kitchen-three .kitchen-stage .kitchen-shade::after { content: none; }
 
 .kitchen-three .kitchen-heading { bottom: 86px; }
 .kitchen-three .kitchen-enter { bottom: 80px; }

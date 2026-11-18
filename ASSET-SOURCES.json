@@ -26,7 +26,7 @@
   "kitchenEnvironment": {
     "limestone": { "source": "/assets/kitchen-hardware-v4.webp", "localAsset": "/assets/kitchen-limestone.webp", "processing": "The existing 256 × 256 material sample, cropped offline and encoded as lossless WebP." },
     "plaster": { "source": "https://polyhaven.com/a/white_plaster_02", "license": "CC0", "localAssets": ["/assets/kitchen-white_plaster_02-color.webp", "/assets/kitchen-white_plaster_02-normal.webp"] },
-    "floor": { "source": "https://polyhaven.com/a/wooden_floor_02", "license": "CC0", "localAssets": ["/assets/kitchen-wooden_floor_02-color.webp", "/assets/kitchen-wooden_floor_02-normal.webp"] },
+    "floor": { "source": "https://polyhaven.com/a/wooden_floor_02", "license": "CC0", "localAssets": ["/assets/kitchen-wooden_floor_02-color.webp", "/assets/kitchen-wooden_floor_02-normal.webp"], "processing": "Reduced the saturation and contrast of the base color for a natural oak finish." },
     "windowAndReflections": { "source": "https://polyhaven.com/a/studio_garden", "license": "CC0", "localAsset": "/assets/kitchen-studio-garden.hdr" }
   },
   "blumThreeReview": {
